@@ -1,1 +1,21 @@
+{
+  "notes": [
+    {
+      "word": "Abundant",
+      "meaning": "ಪ್ರಚುರ",
+      "example": "Abundant water is available."
+    },
+    {
+      "word": "Benevolent",
+      "meaning": "ದಯಾಳು",
+      "example": "She is a benevolent teacher."
+    }
+  ],
+  "question": {
+    "question": "Meaning of 'Abundant'?",
+    "options": ["ಕಡಿಮೆ", "ಪ್ರಚುರ", "ಸಾಮಾನ್ಯ", "ಅಪರಿಚಿತ"],
+    "answer": "ಪ್ರಚುರ",
+    "explanation": "Abundant means plenty. Kannada meaning: ಪ್ರಚುರ."
+  }
+}
 
