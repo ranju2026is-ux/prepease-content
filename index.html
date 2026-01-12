@@ -496,5 +496,54 @@
         const menuEl = document.getElementById('mobile-menu');
         if(toggleBtn) toggleBtn.onclick = () => menuEl.classList.toggle('open');
     </script>
+<!-- ================= CONTENT SECTION ================= -->
+
+<section id="learning-content" style="padding:40px;background:#f5f7fb;">
+  <h2>📘 Vocabulary – Level 1</h2>
+  <div id="notes">Loading notes...</div>
+
+  <h3>📝 Quiz</h3>
+  <div id="quiz"></div>
+  <p id="result"></p>
+</section>
+
+<script>
+fetch("https://raw.githubusercontent.com/ranju2026is-ux/prepease-content/main/general-english/vocabulary/level-1.json")
+.then(res => res.json())
+.then(data => {
+
+  let notesHTML = "";
+  data.notes.forEach(n => {
+    notesHTML += `
+      <div style="background:#fff;padding:12px;margin:10px 0;border-radius:8px;">
+        <b>${n.word}</b><br>
+        Meaning (Kannada): ${n.meaning}<br>
+        Example: ${n.example}
+      </div>
+    `;
+  });
+  document.getElementById("notes").innerHTML = notesHTML;
+
+  let q = data.question;
+  let quizHTML = `<p>${q.question}</p>`;
+  q.options.forEach(opt => {
+    quizHTML += `<button style="margin:6px;" onclick="checkAnswer('${opt}')">${opt}</button>`;
+  });
+  document.getElementById("quiz").innerHTML = quizHTML;
+
+  window.correctAnswer = q.answer;
+  window.explanation = q.explanation;
+});
+
+function checkAnswer(selected) {
+  document.getElementById("result").innerText =
+    selected === correctAnswer
+    ? "✅ Correct! " + explanation
+    : "❌ Wrong. " + explanation;
+}
+</script>
+
+<!-- ================= END CONTENT SECTION ================= -->
 </body>
+
 </html>
