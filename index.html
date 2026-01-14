@@ -25,21 +25,23 @@
         }
 
         .premium-card {
-            @apply bg-white border border-slate-200 rounded-[2rem] p-8 transition-all duration-500 cursor-pointer;
+            @apply bg-white border border-slate-200 rounded-[2.5rem] p-10 transition-all duration-500 cursor-pointer;
             box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.03);
         }
 
         .premium-card:hover {
             @apply -translate-y-2;
-            box-shadow: 0 20px 30px -10px rgba(67, 56, 202, 0.12);
+            box-shadow: 0 25px 40px -15px rgba(67, 56, 202, 0.15);
             border-color: rgba(67, 56, 202, 0.3);
         }
 
         /* ANKI FLIP CARD STYLES */
         .anki-card {
             perspective: 1000px;
-            height: 450px;
+            height: 480px;
             width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
         }
         .anki-card-inner {
             position: relative;
@@ -56,26 +58,21 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            @apply flex flex-col items-center justify-center rounded-[3rem] p-10 border-4 border-white shadow-2xl;
+            @apply flex flex-col items-center justify-center rounded-[3.5rem] p-10 border-8 border-white shadow-2xl;
         }
-        .anki-card-front {
-            @apply bg-white border-indigo-50;
-        }
-        .anki-card-back {
-            @apply bg-indigo-600 text-white;
-            transform: rotateY(180deg);
-        }
+        .anki-card-front { @apply bg-white border-indigo-50; }
+        .anki-card-back { @apply bg-indigo-600 text-white border-indigo-500; transform: rotateY(180deg); }
 
         /* LOGO BOX GROWTH ANIMATION */
-        @keyframes box-growth {
-            0% { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
-            100% { transform: scaleY(1); opacity: 1; transform-origin: bottom; }
+        @keyframes box-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
         }
         @keyframes p-draw {
             0% { stroke-dashoffset: 80; opacity: 0; }
             100% { stroke-dashoffset: 0; opacity: 1; }
         }
-        .logo-box { animation: box-growth 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .logo-box { animation: box-pulse 4s ease-in-out infinite; }
         .logo-p { stroke-dasharray: 80; stroke-dashoffset: 80; animation: p-draw 1s ease-out forwards; animation-delay: 0.5s; }
 
         /* VIEW TRANSITIONS */
@@ -86,7 +83,6 @@
         .fade-in { opacity: 1; transform: translateY(0); transition: all 0.5s ease; }
 
         .font-kannada { line-height: 1.6; }
-        input:focus { outline: none; border-color: #4338ca; }
         
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
@@ -96,24 +92,24 @@
 <body>
 
     <!-- TOP MOTIVATIONAL BAR -->
-    <div id="moto-bar" class="fixed top-0 w-full z-[60] bg-slate-900 text-white py-2.5 overflow-hidden border-b border-white/10 shadow-xl">
+    <div id="moto-bar" class="fixed top-0 w-full z-[60] bg-slate-900 text-white py-3 overflow-hidden border-b border-white/10 shadow-xl">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <span id="moto-text" class="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] inline-block">
-                Consistency is the key to Selection. 🎯
+            <span id="moto-text" class="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] inline-block transition-all">
+                Focus on the mission, not the competition. 🎯
             </span>
         </div>
     </div>
 
     <!-- NAVIGATION -->
-    <nav class="fixed top-[44px] w-full z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
+    <nav class="fixed top-[48px] w-full z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <!-- P IN BOX LOGO -->
+            <!-- PROFESSIONAL P BOX LOGO -->
             <div class="flex items-center gap-4 group cursor-pointer" onclick="navigateTo('home')">
-                <div class="relative flex items-center justify-center">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect class="logo-box" width="40" height="40" rx="8" fill="#4338ca"/>
-                        <!-- High Visibility P -->
+                <div class="relative flex items-center justify-center logo-box">
+                    <svg width="42" height="42" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" rx="10" fill="#4338ca"/>
                         <path class="logo-p" d="M14 28V12H22C24.7614 12 27 14.2386 27 17C27 19.7614 24.7614 22 22 22H14" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="33" cy="7" r="3.5" fill="#10b981" />
                     </svg>
                 </div>
                 <div class="flex flex-col leading-none text-left">
@@ -132,21 +128,21 @@
     </nav>
 
     <!-- MAIN APP CONTAINER -->
-    <main id="app-shell" class="pt-[124px] min-h-screen">
-        <!-- Dynamic Views -->
+    <main id="app-shell" class="pt-[128px] min-h-screen">
+        <!-- Views -->
     </main>
 
     <!-- FOOTER -->
-    <footer class="py-16 bg-white border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+    <footer class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
             <div>
-                <span class="text-lg font-black tracking-tighter text-slate-900 uppercase font-bold">PrepEase Mastery</span>
-                <p class="text-slate-400 text-xs mt-2 max-w-xs leading-relaxed">Tailored for Karnataka KPSC (FDA/SDA) & SSC central aspirants.</p>
+                <span class="text-lg font-black tracking-tighter text-slate-900 uppercase font-bold">PrepEase Academy</span>
+                <p class="text-slate-400 text-xs mt-2 max-w-xs leading-relaxed">Official high-performance study platform for Karnataka KPSC & SSC aspirants.</p>
             </div>
-            <div class="flex gap-8">
+            <div class="flex gap-10">
                 <a href="#" class="text-slate-500 hover:text-indigo-600 font-bold text-[10px] uppercase tracking-widest transition-colors">LinkedIn</a>
                 <a href="#" class="text-slate-500 hover:text-indigo-600 font-bold text-[10px] uppercase tracking-widest transition-colors">Instagram</a>
-                <a href="#" class="text-slate-500 hover:text-indigo-600 font-bold text-[10px] uppercase tracking-widest transition-colors">Community</a>
+                <a href="#" class="text-slate-500 hover:text-indigo-600 font-bold text-[10px] uppercase tracking-widest transition-colors">Telegram Hub</a>
             </div>
         </div>
     </footer>
@@ -154,10 +150,11 @@
     <script>
         // --- SYLLABUS DATA ---
         const quotes = [
-            "Consistency is the key to Selection. 🎯",
+            "Focus on the mission, not the competition. 🎯",
+            "Consistency is the key to Selection. ⚔️",
             "Mastering English is half the battle won. 🇬🇧",
-            "KPSC Excellence begins with everyday habits. 🏛️",
-            "Focus on the mission, not the competition. ⚔️"
+            "Hard work today, Officer rank tomorrow. 🇮🇳",
+            "KPSC Excellence begins with everyday habits. 🏛️"
         ];
         
         const topicsData = {
@@ -165,11 +162,9 @@
                 { id: 'nouns', title: 'Nouns & Case', icon: '🔡' },
                 { id: 'tenses', title: 'Tense Mastery', icon: '⏳' },
                 { id: 'articles', title: 'Articles', icon: '🅰️' },
-                { id: 'subject-verb', title: 'Subject-Verb Agreement', icon: '⚖️' },
                 { id: 'prepositions', title: 'Prepositions', icon: '📍' },
-                { id: 'conjunctions', title: 'Conjunctions', icon: '🔗' },
-                { id: 'active-passive', title: 'Active & Passive Voice', icon: '🔄' },
-                { id: 'direct-indirect', title: 'Direct & Indirect Speech', icon: '💬' }
+                { id: 'subject-verb', title: 'Subject-Verb Agreement', icon: '⚖️' },
+                { id: 'active-passive', title: 'Active/Passive', icon: '🔄' }
             ],
             vocabulary: [
                 { id: 'synonyms', title: 'Synonyms', icon: '📖' },
@@ -186,8 +181,7 @@
             userName: '',
             intendedView: null,
             intendedParams: {},
-            currentCategory: 'General English',
-            currentType: null, // 'grammar' or 'vocabulary'
+            currentType: null,
             currentTopic: null,
             currentLevel: null
         };
@@ -210,7 +204,7 @@
         function handleLogin(event) {
             event.preventDefault();
             const name = document.getElementById('name-input').value;
-            if (name.trim().length < 2) return alert("Please enter your name.");
+            if (name.trim().length < 2) return alert("Please enter your name to proceed.");
             state.userName = name;
             state.isAuthenticated = true;
             if (state.intendedView) {
@@ -223,7 +217,6 @@
             }
         }
 
-        // --- RENDERING ENGINE ---
         function render() {
             const shell = document.getElementById('app-shell');
             const authStatus = document.getElementById('auth-status');
@@ -232,13 +225,13 @@
                 authStatus.innerHTML = `
                     <div class="flex items-center gap-3">
                         <span class="text-sm font-bold text-indigo-700">Hi, ${state.userName.split(' ')[0]}</span>
-                        <button onclick="logout()" class="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center border border-indigo-100 hover:bg-red-50 hover:text-red-500 transition-colors">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                        <button onclick="logout()" class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center border border-indigo-100 hover:bg-red-50 hover:text-red-500 transition-colors">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                         </button>
                     </div>
                 `;
             } else {
-                authStatus.innerHTML = `<button onclick="navigateTo('login')" class="px-6 py-2.5 text-xs font-bold bg-indigo-600 text-white rounded-full transition-all">Sign In</button>`;
+                authStatus.innerHTML = `<button onclick="navigateTo('login')" class="px-8 py-2.5 text-xs font-bold bg-indigo-600 text-white rounded-full transition-all hover:bg-indigo-700 shadow-lg shadow-indigo-100">Sign In</button>`;
             }
 
             switch(state.view) {
@@ -257,33 +250,37 @@
 
         // --- TEMPLATES ---
         function renderHome() {
+            const welcomeMsg = state.isAuthenticated 
+                ? `Hello, <span class="text-indigo-600">${state.userName.split(' ')[0]}!</span><br>Mission Selection starts now.` 
+                : `Secure Your <span class="text-indigo-600 italic">Officer Rank.</span>`;
+
             return `
                 <div class="hero-gradient pt-16 pb-32 px-6 view-transition text-center">
                     <div class="max-w-7xl mx-auto">
-                        <span class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-700 text-[10px] font-black rounded-full mb-6 border border-indigo-100 uppercase tracking-widest">KPSC & SSC Official roadmap 2026</span>
-                        <h1 class="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6 leading-[1.1]">
-                            ${state.isAuthenticated ? `Hello, <span class="text-indigo-600">${state.userName.split(' ')[0]}!</span><br>Mission Selection starts now.` : `Secure Your <span class="text-indigo-600 italic">Officer Rank.</span>`}
+                        <span class="inline-block px-5 py-2 bg-indigo-50 text-indigo-700 text-[10px] font-black rounded-full mb-8 border border-indigo-100 uppercase tracking-[0.2em]">KPSC & SSC Official roadmap 2026</span>
+                        <h1 class="text-6xl md:text-8xl font-black text-slate-900 tracking-tighter mb-8 leading-[0.95]">
+                            ${welcomeMsg}
                         </h1>
-                        <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-16 font-medium">Bilingual study paths for FDA, SDA and SSC. Master general English levels 1-10.</p>
+                        <p class="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-20 font-medium leading-relaxed">Official study paths for FDA, SDA and SSC. Master general English levels 1-10 with interactive active-recall mastery.</p>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                            <div onclick="navigateTo('english-selection')" class="premium-card group">
-                                <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all">🇬🇧</div>
-                                <h3 class="text-2xl font-bold mb-2 tracking-tight">General English</h3>
-                                <p class="text-slate-500 text-sm mb-6 leading-relaxed">Levels 1-10 Grammar & Vocabulary mastery syllabus.</p>
-                                <span class="text-indigo-600 text-xs font-bold uppercase tracking-widest">Mastery Hub ➜</span>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+                            <div onclick="navigateTo('english-selection')" class="premium-card group relative overflow-hidden">
+                                <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-3xl flex items-center justify-center text-4xl mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500">🇬🇧</div>
+                                <h3 class="text-3xl font-bold mb-4 tracking-tight">General English</h3>
+                                <p class="text-slate-500 text-base mb-8 leading-relaxed">Levels 1-10 Grammar & Vocabulary mastery syllabus designed for high-retention.</p>
+                                <span class="text-indigo-600 text-xs font-black uppercase tracking-widest border-b-2 border-indigo-100 pb-1 group-hover:border-indigo-600 transition-all">Open Mastery Hub ➜</span>
                             </div>
-                            <div onclick="navigateTo('exams-pyq', { currentCategory: 'karnataka' })" class="premium-card group">
-                                <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all">🏛️</div>
-                                <h3 class="text-2xl font-bold mb-2 tracking-tight">KPSC Selection</h3>
-                                <p class="text-slate-500 text-sm mb-6">Regional Archives for FDA, SDA and PSI recruitment.</p>
-                                <span class="text-emerald-600 text-xs font-bold uppercase tracking-widest">PYQ Bank Sync ➜</span>
+                            <div onclick="navigateTo('exams-pyq', { currentCategory: 'karnataka' })" class="premium-card group relative overflow-hidden">
+                                <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-3xl flex items-center justify-center text-4xl mb-8 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-500">🏛️</div>
+                                <h3 class="text-3xl font-bold mb-4 tracking-tight">KPSC Selection</h3>
+                                <p class="text-slate-500 text-base mb-8 leading-relaxed">Regional Archives for FDA, SDA and PSI recruitment with verified answer keys.</p>
+                                <span class="text-emerald-600 text-xs font-black uppercase tracking-widest border-b-2 border-emerald-100 pb-1 group-hover:border-emerald-600 transition-all">PYQ Bank Sync ➜</span>
                             </div>
-                            <div onclick="navigateTo('exams-pyq', { currentCategory: 'ssc' })" class="premium-card group">
-                                <div class="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition-all">⚔️</div>
-                                <h3 class="text-2xl font-bold mb-2 tracking-tight">SSC Central Hub</h3>
-                                <p class="text-slate-500 text-sm mb-6">CGL and CHSL focused archives and PYQ practice.</p>
-                                <span class="text-amber-600 text-xs font-bold uppercase tracking-widest">Tier 1 & 2 Roadmap ➜</span>
+                            <div onclick="navigateTo('exams-pyq', { currentCategory: 'ssc' })" class="premium-card group relative overflow-hidden">
+                                <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-3xl flex items-center justify-center text-4xl mb-8 group-hover:bg-amber-600 group-hover:text-white transition-all duration-500">⚔️</div>
+                                <h3 class="text-3xl font-bold mb-4 tracking-tight">SSC Central Hub</h3>
+                                <p class="text-slate-500 text-base mb-8 leading-relaxed">CGL and CHSL focused bilingual archives, patterns and Tier 1 & 2 Roadmap.</p>
+                                <span class="text-amber-600 text-xs font-black uppercase tracking-widest border-b-2 border-amber-100 pb-1 group-hover:border-amber-600 transition-all">Start Practice ➜</span>
                             </div>
                         </div>
                     </div>
@@ -292,26 +289,36 @@
         }
 
         function renderLogin() {
-            return `<div class="max-w-md mx-auto px-6 py-24 view-transition text-center"><h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-2">Welcome Aspirant</h2><p class="text-slate-500 mb-10 font-medium">Please enter your name to begin mastery.</p><form onsubmit="handleLogin(event)" class="bg-white border border-slate-200 p-10 rounded-[3rem] shadow-sm"><label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 text-left">Your Name</label><input id="name-input" type="text" placeholder="Aspirant Name" class="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl font-bold mb-6 focus:bg-white" required><button type="submit" class="w-full py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-xl active:scale-95 transition-all">Enter Mission Hub</button></form></div>`;
+            return `
+                <div class="max-w-md mx-auto px-6 py-24 view-transition text-center">
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-4">Identify Yourself</h2>
+                    <p class="text-slate-500 mb-12 font-medium">Capture your progress and track your mission status.</p>
+                    <form onsubmit="handleLogin(event)" class="bg-white border border-slate-200 p-12 rounded-[3.5rem] shadow-sm text-left">
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Aspirant Full Name</label>
+                        <input id="name-input" type="text" placeholder="e.g. Rahul Patil" class="w-full px-6 py-5 bg-slate-50 border-2 border-slate-100 rounded-2xl font-bold mb-8 focus:bg-white transition-all outline-none focus:border-indigo-600" required>
+                        <button type="submit" class="w-full py-5 bg-indigo-600 text-white font-black rounded-2xl shadow-xl hover:bg-indigo-700 active:scale-95 transition-all uppercase tracking-widest text-xs">Enter Mission Hub</button>
+                    </form>
+                </div>
+            `;
         }
 
         function renderEnglishSelection() {
             return `
                 <div class="max-w-7xl mx-auto px-6 py-20 view-transition">
-                    <button onclick="navigateTo('home')" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-indigo-600 transition-colors">← Dashboard</button>
-                    <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-12">English Preparation Tracks</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <button onclick="navigateTo('home')" class="text-slate-400 font-bold mb-10 flex items-center gap-2 hover:text-indigo-600 transition-colors uppercase text-xs tracking-widest">← Dashboard</button>
+                    <h2 class="text-5xl font-black text-slate-900 tracking-tighter mb-16">Preparation Tracks</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div onclick="navigateTo('topics-grid', { currentType: 'grammar' })" class="premium-card hover:border-indigo-600 group">
-                            <span class="px-3 py-1 bg-indigo-50 text-indigo-700 text-[9px] font-black rounded-full uppercase tracking-widest mb-6 inline-block">Rule Based</span>
-                            <h3 class="text-3xl font-black mb-4 tracking-tight">English Grammar</h3>
-                            <p class="text-slate-500 mb-8 leading-relaxed">Tenses, Voice, Prepositions and Error spotting rules for KPSC/SSC.</p>
-                            <span class="text-indigo-600 font-bold text-sm uppercase tracking-widest">Phase 1-10 Roadmap ➜</span>
+                            <span class="px-4 py-1.5 bg-indigo-50 text-indigo-700 text-[10px] font-black rounded-full uppercase tracking-widest mb-8 inline-block">Rule Based Track</span>
+                            <h3 class="text-4xl font-black mb-4 tracking-tight">English Grammar</h3>
+                            <p class="text-slate-500 text-lg mb-10 leading-relaxed">Complete rules, exceptions and logic for all state and central recruitment patterns.</p>
+                            <span class="text-indigo-600 font-black text-xs uppercase tracking-widest">Phase 1-10 Roadmap ➜</span>
                         </div>
                         <div onclick="navigateTo('topics-grid', { currentType: 'vocabulary' })" class="premium-card hover:border-emerald-500 group">
-                            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-[9px] font-black rounded-full uppercase tracking-widest mb-6 inline-block">Memory Based</span>
-                            <h3 class="text-3xl font-black mb-4 tracking-tight">Vocabulary Hub</h3>
-                            <p class="text-slate-500 mb-8 leading-relaxed">Synonyms, Antonyms and Idioms with bilingual recall technology.</p>
-                            <span class="text-emerald-600 font-bold text-sm uppercase tracking-widest">Phase 1-10 Roadmap ➜</span>
+                            <span class="px-4 py-1.5 bg-emerald-50 text-emerald-700 text-[10px] font-black rounded-full uppercase tracking-widest mb-8 inline-block">Memory Based Track</span>
+                            <h3 class="text-4xl font-black mb-4 tracking-tight">Vocabulary Hub</h3>
+                            <p class="text-slate-500 text-lg mb-10 leading-relaxed">Synonyms, Antonyms and Idioms with bilingual active recall technology.</p>
+                            <span class="text-emerald-600 font-black text-xs uppercase tracking-widest">Phase 1-10 Roadmap ➜</span>
                         </div>
                     </div>
                 </div>
@@ -322,14 +329,17 @@
             const topics = topicsData[state.currentType];
             return `
                 <div class="max-w-7xl mx-auto px-6 py-20 view-transition">
-                    <button onclick="navigateTo('english-selection')" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-indigo-600 transition-colors">← Selection</button>
-                    <h2 class="text-4xl font-black text-slate-900 tracking-tighter capitalize mb-12">${state.currentType} Roadmap</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <button onclick="navigateTo('english-selection')" class="text-slate-400 font-bold mb-10 flex items-center gap-2 hover:text-indigo-600 transition-colors uppercase text-xs tracking-widest">← Back to Category</button>
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 border-b border-slate-100 pb-12">
+                        <h2 class="text-5xl font-black text-slate-900 tracking-tighter capitalize">English ${state.currentType}</h2>
+                        <p class="text-slate-400 font-bold text-sm uppercase tracking-widest">Levels 1-10 Synchronized</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         ${topics.map(t => `
-                            <div onclick="navigateTo('levels-grid', { currentTopic: '${t.id}', currentTopicTitle: '${t.title}' })" class="premium-card p-10 group">
-                                <div class="text-5xl mb-8 group-hover:scale-125 transition-transform duration-500">${t.icon}</div>
-                                <h3 class="text-xl font-bold text-slate-900 mb-4 tracking-tight">${t.title}</h3>
-                                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Phase 1-10 Sync Active</p>
+                            <div onclick="navigateTo('levels-grid', { currentTopic: '${t.id}', currentTopicTitle: '${t.title}' })" class="premium-card p-10 group bg-white border-slate-100 shadow-sm">
+                                <div class="text-6xl mb-10 group-hover:scale-125 transition-transform duration-500">${t.icon}</div>
+                                <h3 class="text-2xl font-bold text-slate-900 mb-2 tracking-tight">${t.title}</h3>
+                                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Mastery Logic Ready</p>
                             </div>
                         `).join('')}
                     </div>
@@ -340,14 +350,14 @@
         function renderLevelsGrid() {
             return `
                 <div class="max-w-7xl mx-auto px-6 py-20 view-transition text-center">
-                    <button onclick="navigateTo('topics-grid')" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-indigo-600 transition-colors">← ${state.currentTopicTitle}</button>
-                    <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-16">${state.currentTopicTitle} Mastery Hub</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                    <button onclick="navigateTo('topics-grid')" class="text-slate-400 font-bold mb-10 flex items-center justify-center gap-2 hover:text-indigo-600 transition-colors mx-auto uppercase text-xs tracking-widest">← Back to Topics</button>
+                    <h2 class="text-5xl font-black text-slate-900 tracking-tighter mb-20">${state.currentTopicTitle} Roadmap</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
                         ${Array.from({length: 10}, (_, i) => i + 1).map(lv => `
                             <div onclick="navigateTo('content-view', { currentLevel: ${lv} })" 
-                                 class="p-10 border-2 border-slate-100 rounded-[2.5rem] text-center hover:border-indigo-600 hover:shadow-2xl transition-all cursor-pointer group bg-white shadow-sm">
-                                <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block group-hover:text-indigo-600">Phase</span>
-                                <span class="text-4xl font-black text-slate-900">${lv}</span>
+                                 class="p-12 border-4 border-slate-50 rounded-[3rem] text-center hover:border-indigo-600 hover:shadow-2xl transition-all cursor-pointer group bg-white shadow-sm">
+                                <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-4 block group-hover:text-indigo-600">Phase</span>
+                                <span class="text-5xl font-black text-slate-900">${lv}</span>
                             </div>
                         `).join('')}
                     </div>
@@ -357,73 +367,74 @@
 
         function renderContentView() {
             return `
-                <div class="max-w-4xl mx-auto px-6 py-20 view-transition">
-                    <button onclick="navigateTo('levels-grid')" class="text-slate-400 font-bold flex items-center gap-2 hover:text-indigo-600 transition-colors mb-12">← All Phases</button>
+                <div class="max-w-5xl mx-auto px-6 py-20 view-transition">
+                    <button onclick="navigateTo('levels-grid')" class="text-slate-400 font-bold flex items-center gap-2 hover:text-indigo-600 transition-colors mb-16 uppercase text-xs tracking-widest">← Back to Grid</button>
                     <div id="content-container"></div>
                 </div>
             `;
         }
 
-        // --- FETCH & ANKI ENGINE ---
+        // --- UPDATED FETCH ENGINE ---
         async function loadAnkiContent() {
             const container = document.getElementById('content-container');
-            container.innerHTML = `<div class="flex flex-col items-center justify-center py-24"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mb-4"></div><p class="text-slate-400 text-[10px] font-bold animate-pulse uppercase tracking-widest">Syncing from GitHub...</p></div>`;
+            container.innerHTML = `<div class="flex flex-col items-center justify-center py-32"><div class="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600 mb-6"></div><p class="text-slate-400 text-xs font-black uppercase tracking-[0.3em] animate-pulse">Syncing GitHub Records...</p></div>`;
             
-            // Path structure: ./general-english/[topic]/level[n].json
-            // Example: ./general-english/synonyms/level1.json
+            // CORRECTED PATH ALIGNMENT: ./general-english/[topic]/level[n].json
             const path = `./general-english/${state.currentTopic}/level${state.currentLevel}.json`;
 
             try {
                 const response = await fetch(path);
-                if (!response.ok) throw new Error("404");
+                if (!response.ok) throw new Error();
                 const notes = await response.json();
-                renderAnkiCards(notes, path);
+                renderAnkiCards(notes);
             } catch (err) {
                 container.innerHTML = `
-                    <div class="text-center py-20 bg-white border border-slate-200 rounded-[3rem] shadow-sm">
-                        <div class="text-5xl mb-6">📂</div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 tracking-tight">Milestone Offline</h3>
-                        <p class="text-slate-500 mb-4 text-sm max-w-xs mx-auto font-medium">I am looking for your file at this exact location:</p>
-                        <code class="bg-slate-100 p-2 rounded text-indigo-600 mb-8 block text-xs overflow-x-auto">${path}</code>
-                        <p class="text-slate-400 text-xs mb-8">Ensure your folder is named <b>${state.currentTopic}</b> inside <b>general-english</b>.</p>
-                        <button onclick="navigateTo('levels-grid')" class="px-10 py-3 bg-indigo-600 text-white font-bold rounded-xl shadow-lg active:scale-95 transition-all">Back to Roadmap</button>
+                    <div class="text-center py-24 bg-white border border-slate-200 rounded-[4rem] shadow-sm">
+                        <div class="text-6xl mb-10">📂</div>
+                        <h3 class="text-3xl font-black text-slate-900 mb-4 tracking-tight">Milestone Offline</h3>
+                        <p class="text-slate-500 mb-4 text-base max-w-xs mx-auto font-medium leading-relaxed">I am looking for your level file at this exact repository location:</p>
+                        <code class="bg-slate-100 p-3 rounded-xl text-indigo-600 mb-12 inline-block text-sm font-bold border border-indigo-50">${path}</code>
+                        <div class="flex justify-center gap-4">
+                            <button onclick="navigateTo('levels-grid')" class="px-10 py-4 bg-indigo-600 text-white font-black rounded-2xl shadow-xl active:scale-95 transition-all uppercase tracking-widest text-[10px]">Back to Grid</button>
+                        </div>
                     </div>
                 `;
             }
         }
 
-        function renderAnkiCards(notes, path) {
+        function renderAnkiCards(notes) {
             const container = document.getElementById('content-container');
             let html = `
-                <div class="mb-16 text-center">
-                    <span class="px-4 py-1 bg-indigo-50 text-indigo-700 text-[10px] font-black rounded-full uppercase tracking-widest mb-4 inline-block">Active Recall Mastery</span>
-                    <h2 class="text-5xl font-black text-slate-900 tracking-tighter">Phase ${state.currentLevel} Progress</h2>
-                    <p class="text-slate-400 text-sm mt-4 uppercase tracking-tighter font-bold">Tap card to reveal mapping</p>
+                <div class="mb-20 text-center">
+                    <span class="px-5 py-1.5 bg-indigo-50 text-indigo-700 text-[10px] font-black rounded-full uppercase tracking-[0.2em] mb-6 inline-block">Active Recall Mastery</span>
+                    <h2 class="text-6xl font-black text-slate-900 tracking-tighter capitalize">${state.currentTopic} Level ${state.currentLevel}</h2>
+                    <p class="text-slate-400 text-sm mt-6 uppercase tracking-[0.2em] font-bold">Tap card to verify your mapping</p>
                 </div>
-                <div class="grid gap-12">
+                <div class="flex flex-col gap-20 items-center">
             `;
 
             notes.forEach(item => {
-                const syns = (item.meaning_english || item.meaning_en || "").replace(/_/g, ', ');
-                const kn = item.meaning_kannada || item.meaning_kn || "";
+                // Formatting Synonyms: Real_Authentic -> Real, Authentic
+                const synonyms = (item.meaning_english || "").replace(/_/g, ', ');
                 
                 html += `
                     <div class="anki-card" onclick="this.classList.toggle('flipped')">
                         <div class="anki-card-inner">
+                            <!-- FRONT -->
                             <div class="anki-card-front">
-                                <span class="text-7xl mb-8">${item.emoji || '📗'}</span>
-                                <h3 class="text-5xl font-black text-slate-900 tracking-tighter">${item.word}</h3>
-                                <p class="mt-12 text-slate-300 font-bold text-[10px] uppercase tracking-[0.3em]">Recall synonyms & flip</p>
+                                <span class="text-8xl mb-12 drop-shadow-lg">${item.emoji || '📗'}</span>
+                                <h3 class="text-6xl font-black text-slate-900 tracking-tighter">${item.word}</h3>
+                                <p class="mt-16 text-slate-300 font-bold text-[10px] uppercase tracking-[0.5em]">Think mapping & flip</p>
                             </div>
+                            <!-- BACK -->
                             <div class="anki-card-back">
-                                <p class="text-emerald-300 font-black text-xs uppercase tracking-widest mb-6 border-b border-emerald-300/30 pb-2">Bilingual Match</p>
-                                <h3 class="text-5xl font-bold mb-4 font-kannada">${kn}</h3>
-                                <div class="h-px w-20 bg-white/20 mb-8"></div>
-                                <div class="text-center px-4">
-                                    <p class="text-3xl font-bold text-white mb-2">${syns}</p>
-                                    <p class="text-sm font-medium text-white/60 leading-relaxed max-w-sm mx-auto">${item.meaning_en || item.meaning_english || ''}</p>
+                                <p class="text-emerald-300 font-black text-xs uppercase tracking-widest mb-8 border-b border-emerald-300/30 pb-3">Bilingual Match</p>
+                                <h3 class="text-7xl font-bold mb-6 font-kannada">${item.meaning_kannada || ''}</h3>
+                                <div class="h-1 w-24 bg-white/20 mb-10 rounded-full"></div>
+                                <div class="text-center px-6">
+                                    <p class="text-4xl font-bold text-white mb-4 leading-tight">${synonyms}</p>
                                 </div>
-                                <span class="mt-12 px-6 py-2 bg-white/10 rounded-full text-[10px] font-black uppercase tracking-widest">Mastered ➜</span>
+                                <span class="mt-14 px-10 py-3 bg-white/10 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white/20 transition-all">Mastered ➜</span>
                             </div>
                         </div>
                     </div>
@@ -431,11 +442,13 @@
             });
 
             html += `
-                <div class="p-16 bg-slate-900 rounded-[4rem] text-white text-center shadow-2xl mt-12 relative overflow-hidden group">
-                    <h3 class="text-4xl font-black mb-4 tracking-tight">Milestone Reached!</h3>
-                    <p class="text-slate-400 mb-10 text-lg font-medium">You have visualized all ${notes.length} concepts in Phase ${state.currentLevel}.</p>
-                    <button onclick="navigateTo('levels-grid')" class="px-12 py-5 bg-white text-slate-900 font-black rounded-2xl shadow-xl hover:bg-slate-50 transition-all uppercase tracking-widest text-xs">Unlock Next Phase</button>
-                    <div class="absolute -right-10 -bottom-10 text-white opacity-[0.03] text-9xl font-black rotate-12 group-hover:scale-110 transition-transform uppercase">PHASE ${state.currentLevel}</div>
+                <div class="p-20 bg-slate-900 rounded-[5rem] text-white text-center shadow-2xl mt-20 relative overflow-hidden group w-full">
+                    <div class="relative z-10">
+                        <h3 class="text-4xl font-black mb-6 tracking-tight">Level Complete!</h3>
+                        <p class="text-slate-400 mb-12 text-lg font-medium max-w-sm mx-auto">You have visualized all ${notes.length} concepts in Level ${state.currentLevel}.</p>
+                        <button onclick="navigateTo('levels-grid')" class="px-14 py-5 bg-white text-slate-900 font-black rounded-2xl shadow-xl hover:bg-slate-50 transition-all uppercase tracking-widest text-[10px]">Unlock Next Phase</button>
+                    </div>
+                    <div class="absolute -right-16 -bottom-16 text-white opacity-[0.03] text-[15rem] font-black rotate-12 group-hover:scale-110 transition-transform uppercase">LEVEL ${state.currentLevel}</div>
                 </div>
             </div>`;
             container.innerHTML = html;
@@ -443,11 +456,11 @@
 
         function renderExamsPYQ() {
             const isKarnataka = state.currentCategory === 'karnataka';
-            return `<div class="max-w-7xl mx-auto px-6 py-20 view-transition text-center"><button onclick="navigateTo('home')" class="text-slate-400 font-bold mb-8 flex items-center justify-center gap-2 hover:text-indigo-600 transition-colors mx-auto">← Dashboard</button><h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-12 capitalize">${state.currentCategory} Regional Hub</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left"><div class="premium-card flex justify-between items-center group"><div><h3 class="text-2xl font-bold text-slate-900 mb-1 tracking-tight font-bold">Official Archives 2024</h3><p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Verified Answer Key</p></div><div class="w-14 h-14 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div></div>`;
+            return `<div class="max-w-7xl mx-auto px-6 py-24 view-transition text-center"><button onclick="navigateTo('home')" class="text-slate-400 font-bold mb-10 flex items-center justify-center gap-2 hover:text-indigo-600 transition-colors mx-auto uppercase text-xs tracking-widest">← Dashboard</button><h2 class="text-5xl font-black text-slate-900 tracking-tighter mb-20 capitalize">${state.currentCategory} Regional Hub</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left"><div class="premium-card flex justify-between items-center group"><div><h3 class="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Official Archives 2024</h3><p class="text-[10px] font-black text-emerald-600 uppercase tracking-widest">Verified Solution Sync</p></div><div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-3xl flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div></div>`;
         }
 
         function renderDoubts() {
-            return `<div class="max-w-3xl mx-auto px-6 py-20 text-center view-transition"><div class="w-24 h-24 bg-emerald-50 text-emerald-600 rounded-[2.5rem] flex items-center justify-center text-4xl mx-auto mb-8 shadow-sm">💡</div><h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-12">Clear Doubts</h2><div class="bg-white border border-slate-200 p-12 rounded-[3rem] shadow-sm text-left"><div class="mb-8 font-bold"><p class="text-xs uppercase tracking-widest text-slate-400 mb-2">Telegram Academy</p><p class="text-2xl text-indigo-700">@PrepEase_Official</p></div><div class="font-bold"><p class="text-xs uppercase tracking-widest text-slate-400 mb-2">Email Helpdesk</p><p class="text-2xl text-slate-900">help@prepease.com</p></div></div><button onclick="navigateTo('home')" class="mt-12 py-5 px-10 bg-indigo-600 text-white font-bold rounded-[2rem] hover:bg-indigo-700 shadow-xl transition-all uppercase tracking-widest text-xs">Continue Mission</button></div>`;
+            return `<div class="max-w-3xl mx-auto px-6 py-24 text-center view-transition"><div class="w-28 h-28 bg-emerald-50 text-emerald-600 rounded-[3rem] flex items-center justify-center text-5xl mx-auto mb-12 shadow-sm">💡</div><h2 class="text-5xl font-black text-slate-900 tracking-tighter mb-16">Clear Doubts</h2><div class="bg-white border border-slate-200 p-16 rounded-[4rem] shadow-sm text-left"><div class="mb-10 font-bold"><p class="text-xs uppercase tracking-widest text-slate-400 mb-3">Telegram Hub</p><p class="text-3xl text-indigo-700">@PrepEase_Academy</p></div><div class="font-bold"><p class="text-xs uppercase tracking-widest text-slate-400 mb-3">Academic Desk</p><p class="text-2xl text-slate-900 leading-none">help@prepease.com</p></div></div><button onclick="navigateTo('home')" class="mt-16 py-6 px-12 bg-indigo-600 text-white font-black rounded-3xl hover:bg-indigo-700 shadow-xl transition-all uppercase tracking-widest text-xs">Return to Dashboard</button></div>`;
         }
 
         // --- MOTTO CYCLE ---
