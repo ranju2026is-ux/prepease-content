@@ -368,8 +368,8 @@
             const container = document.getElementById('content-container');
             container.innerHTML = `<div class="flex flex-col items-center justify-center py-24"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mb-4"></div><p class="text-slate-400 text-[10px] font-bold animate-pulse uppercase tracking-widest">Syncing from GitHub...</p></div>`;
             
-            // Fixed Path Construction: general-english/vocabulary/level-1.json (Category Folder -> Topic File)
-            const path = `./general-english/${state.currentType}/level-${state.currentLevel}.json`;
+            // Path structure: ./general-english/[type]/[topic]/level[n].json
+            const path = `./general-english/${state.currentType}/${state.currentTopic}/level${state.currentLevel}.json`;
 
             try {
                 const response = await fetch(path);
@@ -400,20 +400,17 @@
             `;
 
             notes.forEach(item => {
-                // FormattingSynonyms: Real_Authentic -> Real, Authentic
                 const syns = (item.meaning_english || item.meaning_en || "").replace(/_/g, ', ');
                 const kn = item.meaning_kannada || item.meaning_kn || "";
                 
                 html += `
                     <div class="anki-card" onclick="this.classList.toggle('flipped')">
                         <div class="anki-card-inner">
-                            <!-- FRONT OF CARD -->
                             <div class="anki-card-front">
                                 <span class="text-7xl mb-8">${item.emoji || '📗'}</span>
                                 <h3 class="text-5xl font-black text-slate-900 tracking-tighter">${item.word}</h3>
                                 <p class="mt-12 text-slate-300 font-bold text-[10px] uppercase tracking-[0.3em]">Recall synonyms & flip</p>
                             </div>
-                            <!-- BACK OF CARD -->
                             <div class="anki-card-back">
                                 <p class="text-emerald-300 font-black text-xs uppercase tracking-widest mb-6 border-b border-emerald-300/30 pb-2">Bilingual Match</p>
                                 <h3 class="text-5xl font-bold mb-4 font-kannada">${kn}</h3>
