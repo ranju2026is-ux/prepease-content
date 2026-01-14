@@ -29,378 +29,110 @@
 </head>
 <body class="bg-white">
 
-    <nav class="border-b border-slate-50 py-5 px-6 md:px-12 flex justify-between items-center bg-white/90 sticky top-0 z-50 backdrop-blur-xl">
-        <div onclick="showView('landingView')" class="flex items-center gap-2 cursor-pointer group">
-            <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center text-white font-black text-lg">P</div>
-            <span class="text-xl font-bold text-slate-900 tracking-tight">PrepEase</span>
-        </div>
-        <div id="nav-actions" class="flex items-center gap-6">
-            <button onclick="showView('dashboardView')" class="text-sm font-bold text-slate-500 hover:text-sky-500 transition-all">My Dashboard</button>
-        </div>
-    </nav>
-
-    <!-- STEP 1: SEPARATE SECTION BLOCKS -->
-    
-    <!-- REDESIGNED LANDING PAGE -->
+    <!-- STEP 2: ADDED REQUIRED HTML STRUCTURE -->
     <section id="landingView" class="animate-page">
         <div class="max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
-            <span class="inline-block px-4 py-1.5 bg-sky-50 text-sky-600 text-xs font-bold rounded-full uppercase tracking-widest mb-6">Built for KPSC & SSC Aspirants</span>
-            <h1 class="text-6xl md:text-8xl font-black text-slate-900 leading-tight mb-8 tracking-tighter">
-                Master English. <br><span class="text-sky-500">Secure Your Rank.</span>
-            </h1>
-            <p class="text-xl text-slate-500 leading-relaxed mb-12 max-w-2xl mx-auto">
-                Simple notes, active-recall flashcards, and pattern-based quizzes designed to help you clear competitive exams with confidence.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="showView('dashboardView')" class="btn-primary text-lg">Start Learning Now</button>
-                <button onclick="showView('contentView'); renderCategorySelect();" class="btn-secondary text-lg">Explore Topics</button>
-            </div>
-            
-            <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 opacity-60">
-                <div class="p-6">
-                    <div class="text-3xl mb-4">🃏</div>
-                    <h3 class="font-bold text-slate-900">Spaced Repetition</h3>
-                    <p class="text-sm">Never forget a word again.</p>
-                </div>
-                <div class="p-6">
-                    <div class="text-3xl mb-4">✍️</div>
-                    <h3 class="font-bold text-slate-900">Pattern Focus</h3>
-                    <p class="text-sm">Questions based on regional PYQs.</p>
-                </div>
-                <div class="p-6">
-                    <div class="text-3xl mb-4">📈</div>
-                    <h3 class="font-bold text-slate-900">Step-by-Step</h3>
-                    <p class="text-sm">Level 1 to 10 mastery flow.</p>
-                </div>
-            </div>
+            <h1 class="text-6xl md:text-8xl font-black text-slate-900 leading-tight mb-8 tracking-tighter">PrepEase</h1>
+            <p class="text-xl text-slate-500 leading-relaxed mb-12 max-w-2xl mx-auto">Smart Preparation for Competitive Exams</p>
+            <button onclick="goDashboard()" class="btn-primary text-lg">Get Started</button>
         </div>
     </section>
 
-    <!-- DASHBOARD VIEW -->
-    <section id="dashboardView" class="hidden animate-page">
+    <section id="dashboardView" style="display:none;" class="animate-page">
         <div class="max-w-6xl mx-auto px-6 py-12">
-            <div class="relative p-10 bg-slate-900 rounded-[2.5rem] overflow-hidden mb-12">
-                <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div class="text-center md:text-left">
-                        <h2 class="text-3xl font-extrabold text-white mb-2">Preparation Status</h2>
-                        <p id="due-count-text" class="text-slate-400">Master every topic level-by-level.</p>
-                    </div>
-                    <div class="relative w-32 h-32">
-                        <svg class="w-full h-full progress-ring">
-                            <circle class="text-slate-800" stroke-width="6" stroke="currentColor" fill="transparent" r="60" cx="64" cy="64"/>
-                            <circle id="progress-circle" class="text-sky-500" stroke-width="6" stroke-dasharray="377" stroke-dashoffset="377" stroke-linecap="round" stroke="currentColor" fill="transparent" r="60" cx="64" cy="64"/>
-                        </svg>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
-                            <span id="progress-pct" class="text-2xl font-bold">0%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <h2 class="text-4xl font-extrabold text-slate-900 mb-12">Dashboard</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div onclick="showView('contentView'); renderCategorySelect();" class="group p-10 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-1 cursor-pointer transition-all">
+                <div onclick="goContent()" class="group p-10 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-1 cursor-pointer transition-all">
                     <div class="w-16 h-16 bg-sky-500 rounded-2xl flex items-center justify-center text-white text-3xl mb-6 shadow-lg shadow-sky-100">🇬🇧</div>
                     <h3 class="text-2xl font-bold mb-2">General English</h3>
-                    <p class="text-slate-500">Grammar & Vocabulary sync modules.</p>
-                    <div class="mt-6 text-sky-500 font-bold flex items-center gap-2">Start Roadmap <span>→</span></div>
-                </div>
-                <div class="p-10 bg-slate-50 border border-slate-100 rounded-[2rem] opacity-50">
-                    <div class="w-16 h-16 bg-slate-200 rounded-2xl flex items-center justify-center text-slate-400 text-3xl mb-6">📄</div>
-                    <h3 class="text-2xl font-bold mb-2">Full Mock Tests</h3>
-                    <p class="text-slate-400">100-question papers (Soon).</p>
+                    <p class="text-slate-500">Master Vocabulary and Grammar topics.</p>
+                    <button class="mt-6 text-sky-500 font-bold">Open Module →</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTENT VIEW (Categories, Topics, Levels, Study) -->
-    <section id="contentView" class="hidden animate-page"></section>
+    <section id="contentView" style="display:none;" class="animate-page">
+        <div class="max-w-4xl mx-auto px-6 py-16">
+            <h2 class="text-5xl font-black text-slate-900 mb-12 tracking-tighter">General English</h2>
+            
+            <div class="flex gap-4 mb-12">
+                <button onclick="loadSynonymsLevel1()" class="px-8 py-4 bg-sky-500 text-white font-bold rounded-xl shadow-lg hover:bg-sky-600 transition-all">
+                    Synonyms – Level 1
+                </button>
+                <button onclick="goDashboard()" class="px-8 py-4 bg-slate-100 text-slate-600 font-bold rounded-xl hover:bg-slate-200 transition-all">
+                    ⬅ Back to Dashboard
+                </button>
+            </div>
+
+            <div id="notes-list" class="grid gap-6">
+                <!-- JSON data will be injected here -->
+            </div>
+        </div>
+    </section>
 
     <div id="ui-message" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 rounded-2xl bg-slate-900 text-white text-sm font-bold shadow-2xl hidden animate-page"></div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = 'prepease-karnataka-v14';
-
-        // --- STEP 2: JS VIEW SWITCHER ---
-        window.showView = function(viewId) {
-            // Hide all primary sections
-            const views = ["landingView", "dashboardView", "contentView"];
-            views.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.classList.add("hidden");
-            });
-
-            // If a specific logic path is needed (like 'landing')
-            if (viewId === 'landing') viewId = 'landingView';
-            if (viewId === 'dashboard') viewId = 'dashboardView';
-
-            const target = document.getElementById(viewId);
-            if (target) {
-                target.classList.remove("hidden");
-                if (viewId === 'dashboardView') updateDashboardHeader();
-            }
-            window.scrollTo(0, 0);
-        };
-
-        const CONTENT_BASE = "./general-english/vocabulary/";
-        const FLASHCARD_KEY = 'prepease_flashcards_v1';
-
-        // --- APP STATE ---
-        let user = null;
-        let userProfile = { name: "Aspirant", completedLevels: { 'synonyms': [1,2,3,4] } }; 
-        let activeLevelData = null;
-        let flashcardSession = { words: [], currentIdx: 0, levelId: null };
-        let currentTopic = "synonyms";
-
-        // --- INITIALIZATION ---
-        window.onload = async () => {
-            await signInAnonymously(auth);
-            onAuthStateChanged(auth, async (u) => {
-                user = u;
-                if (user) await fetchUserProfile();
-                showView('landingView');
-            });
-        };
-
-        async function fetchUserProfile() {
-            if (!user) return;
-            const userDoc = doc(db, 'artifacts', appId, 'users', user.uid, 'profile', 'data');
-            const snap = await getDoc(userDoc);
-            if (snap.exists()) {
-                userProfile = { ...userProfile, ...snap.data() };
-            } else {
-                await setDoc(userDoc, userProfile);
-            }
+    <!-- STEP 3: ADDED NAVIGATION & LOADING JS -->
+    <script>
+        function hideAll() {
+            document.getElementById("landingView").style.display = "none";
+            document.getElementById("dashboardView").style.display = "none";
+            document.getElementById("contentView").style.display = "none";
         }
 
-        function updateDashboardHeader() {
-            const count = (userProfile.completedLevels['synonyms'] || []).length;
-            const due = Object.values(JSON.parse(localStorage.getItem(FLASHCARD_KEY) || '{}')).filter(p => p.nextReview <= Date.now()).length;
-            const pct = Math.round((count / 10) * 100);
+        function goDashboard() {
+            hideAll();
+            document.getElementById("dashboardView").style.display = "block";
+        }
+
+        function goContent() {
+            hideAll();
+            document.getElementById("contentView").style.display = "block";
+        }
+
+        /* JSON loader */
+        function loadSynonymsLevel1() {
+            const listContainer = document.getElementById("notes-list");
+            listContainer.innerHTML = "<p class='animate-pulse text-slate-400'>Loading notes...</p>";
             
-            const dueText = document.getElementById('due-count-text');
-            if (dueText) dueText.innerText = due > 0 ? `Attention: ${due} cards due for revision.` : "Level 1 to 10 roadmap is active.";
-            
-            const pctText = document.getElementById('progress-pct');
-            if (pctText) pctText.innerText = `${pct}%`;
-
-            const circle = document.getElementById('progress-circle');
-            if (circle) circle.style.strokeDashoffset = 377 - (377 * (count/10));
-        }
-
-        // --- CONTENT RENDERERS (Inside contentView) ---
-
-        window.renderCategorySelect = () => {
-            const contentView = document.getElementById('contentView');
-            contentView.innerHTML = `
-                <div class="max-w-6xl mx-auto px-6 py-16 animate-page">
-                    <button onclick="showView('dashboardView')" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-sky-500">← Dashboard</button>
-                    <h2 class="text-4xl font-extrabold text-slate-900 mb-12 tracking-tight">Select English Track</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div onclick="renderTopicSelect('grammar')" class="group p-10 bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-xl cursor-pointer transition-all">
-                            <div class="text-4xl mb-6">🔡</div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-2">Grammar</h3>
-                            <p class="text-slate-500">Nouns, Tenses, Voice, and Error Spotting rules.</p>
-                        </div>
-                        <div onclick="renderTopicSelect('vocabulary')" class="group p-10 bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-xl cursor-pointer transition-all">
-                            <div class="text-4xl mb-6">📚</div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-2">Vocabulary</h3>
-                            <p class="text-slate-500">Synonyms, Idioms, and One-word substitutions.</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        };
-
-        window.renderTopicSelect = (category) => {
-            const contentView = document.getElementById('contentView');
-            contentView.innerHTML = `
-                <div class="max-w-6xl mx-auto px-6 py-16 animate-page">
-                    <button onclick="renderCategorySelect()" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-sky-500">← Categories</button>
-                    <h2 class="text-4xl font-extrabold text-slate-900 mb-12 tracking-tight">${category.charAt(0).toUpperCase() + category.slice(1)} Topics</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div onclick="renderLevelsGrid('synonyms')" class="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-lg cursor-pointer transition-all">
-                            <div class="text-3xl mb-4">📖</div>
-                            <h4 class="text-xl font-bold">Synonyms</h4>
-                            <p class="text-slate-400 text-sm mt-1">10 Levels Available</p>
-                        </div>
-                        <div onclick="showMessage('Coming soon!')" class="p-8 bg-slate-50 border border-slate-100 rounded-3xl opacity-50">
-                            <div class="text-3xl mb-4">🌓</div>
-                            <h4 class="text-xl font-bold">Other Topics</h4>
-                            <p class="text-slate-400 text-sm mt-1">Under expansion</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        };
-
-        window.renderLevelsGrid = (topic) => {
-            currentTopic = topic;
-            const contentView = document.getElementById('contentView');
-            const unlocked = userProfile.completedLevels[topic] || [1];
-
-            contentView.innerHTML = `
-                <div class="max-w-6xl mx-auto px-6 py-16 animate-page">
-                    <button onclick="renderTopicSelect('vocabulary')" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-sky-500">← Topics</button>
-                    <h2 class="text-4xl font-extrabold text-slate-900 mb-12 tracking-tight">Select Your Level</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="levels-container">
-                        ${Array.from({ length: 10 }, (_, i) => i + 1).map(id => {
-                            const isUnlocked = unlocked.includes(id) || id === 1;
-                            // STEP 4: LEVEL 1 BUTTON CONNECTION
-                            if (id === 1) {
-                                return `
-                                    <button onclick="loadSynonymsLevel1()" class="p-8 bg-white border border-sky-100 shadow-sm rounded-3xl hover:shadow-xl hover:-translate-y-1 transition-all text-left group">
-                                        <div class="w-12 h-12 bg-sky-500 rounded-xl flex items-center justify-center text-white font-bold mb-6 group-hover:rotate-6 transition-all">1</div>
-                                        <h4 class="text-xl font-bold">Level 1</h4>
-                                        <p class="text-slate-400 text-sm mt-1">Open Study Hub</p>
-                                    </button>
-                                `;
-                            }
-                            return `
-                                <div onclick="${isUnlocked ? `loadLevel('${topic}', ${id})` : 'showMessage(\'Locked\')'}" 
-                                     class="p-8 bg-white border border-slate-100 ${isUnlocked ? 'shadow-sm hover:shadow-xl hover:-translate-y-1' : 'level-locked'} rounded-3xl cursor-pointer transition-all">
-                                    <div class="w-12 h-12 ${isUnlocked ? 'bg-sky-500' : 'bg-slate-200'} rounded-xl flex items-center justify-center text-white font-bold mb-6">${id}</div>
-                                    <h4 class="text-xl font-bold">${isUnlocked ? `Level ${id}` : `Level ${id} 🔒`}</h4>
-                                    <p class="text-slate-400 text-sm mt-1">${isUnlocked ? 'Available' : 'Locked'}</p>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                </div>
-            `;
-        };
-
-        window.loadLevel = async (topicId, levelId) => {
-            const contentView = document.getElementById('contentView');
-            contentView.innerHTML = `<div class="flex items-center justify-center min-h-[50vh]"><div class="w-10 h-10 border-4 border-sky-500 border-t-transparent rounded-full animate-spin"></div></div>`;
-            try {
-                const response = await fetch(`${CONTENT_BASE}${topicId}/level-${levelId}.json`);
-                if (!response.ok) throw new Error("File not found");
-                activeLevelData = await response.json();
-                renderNotes(topicId, levelId);
-            } catch (err) {
-                contentView.innerHTML = `<div class="p-20 text-center text-slate-400"><h2 class="text-2xl font-bold mb-4">Coming Soon</h2><button onclick="renderLevelsGrid('${topicId}')" class="text-sky-500 underline">Back to Levels</button></div>`;
-            }
-        };
-
-        function renderNotes(topicId, levelId) {
-            const contentView = document.getElementById('contentView');
-            contentView.innerHTML = `
-                <div class="max-w-4xl mx-auto px-6 py-16 animate-page">
-                    <button onclick="renderLevelsGrid('${topicId}')" class="text-slate-400 font-bold mb-8 flex items-center gap-2">← Back</button>
-                    <h2 class="text-5xl font-black text-slate-900 mb-12 tracking-tighter">Bilingual Notes</h2>
-                    <div id="notes-list" class="grid gap-10">
-                        ${activeLevelData.map(v => `
-                            <div class="p-10 bg-white border border-slate-100 rounded-[2.5rem] shadow-sm flex items-center gap-8">
-                                <div class="text-6xl">${v.emoji || '📖'}</div>
-                                <div class="flex-1">
-                                    <h3 class="text-3xl font-extrabold text-slate-900 mb-1">${v.word}</h3>
-                                    <p class="text-2xl font-bold text-sky-500 mb-4 font-kannada">${v.meaning_kannada || ''}</p>
-                                    <p class="font-bold text-slate-700 italic">"${v.meaning_english || ''}"</p>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="mt-16 p-12 bg-slate-900 rounded-[3rem] text-center">
-                        <h3 class="text-2xl font-bold text-white mb-8">Ready for memory review?</h3>
-                        <div class="flex flex-col sm:flex-row justify-center gap-4">
-                            <button onclick="startFlashcardSession(${levelId})" class="px-10 py-5 bg-white text-slate-900 font-bold rounded-2xl">Review Flashcards</button>
-                            <button onclick="showMessage('Quiz coming soon!')" class="px-10 py-5 bg-sky-500 text-white font-bold rounded-2xl">Start Quiz</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        window.loadSynonymsLevel1 = () => {
-            showView('contentView');
-            const contentView = document.getElementById('contentView');
-            contentView.innerHTML = `<div class="max-w-4xl mx-auto px-6 py-16 animate-page"><div id="notes-list" class="grid gap-6">Loading...</div></div>`;
-
-            fetch(CONTENT_BASE + "synonyms/level-1.json")
-                .then(res => res.json())
-                .then(data => {
-                    activeLevelData = Array.isArray(data) ? data : (data.notes || []);
-                    renderNotes('synonyms', 1);
+            fetch("./general-english/vocabulary/level-1.json")
+                .then(res => {
+                    if (!res.ok) throw new Error("File not found");
+                    return res.json();
                 })
-                .catch(() => {
-                    document.getElementById('notes-list').innerHTML = "<p class='p-20 text-center text-slate-400'>Error loading data.</p>";
-                });
-        };
+                .then(data => {
+                    listContainer.innerHTML = "";
+                    
+                    // Handle the expected structure provided in the prompt logic
+                    const notes = data.notes || [];
 
-        // --- FLASHCARD LOGIC ---
-        window.startFlashcardSession = (levelId) => {
-            const progress = JSON.parse(localStorage.getItem(FLASHCARD_KEY) || '{}');
-            flashcardSession = {
-                levelId,
-                currentIdx: 0,
-                words: activeLevelData.filter(w => !progress[w.word] || progress[w.word].nextReview <= Date.now())
-            };
-            if (flashcardSession.words.length === 0) {
-                showMessage("Level fully mastered!");
-                return;
-            }
-            renderFlashcardUI();
-        };
-
-        function renderFlashcardUI() {
-            const contentView = document.getElementById('contentView');
-            const data = flashcardSession.words[flashcardSession.currentIdx];
-            contentView.innerHTML = `
-                <div class="max-w-4xl mx-auto px-6 py-16 animate-page flex flex-col items-center">
-                    <div class="w-full flex justify-between items-center mb-12">
-                        <button onclick="renderNotes('synonyms', ${flashcardSession.levelId})" class="text-slate-400 font-bold">← Quit</button>
-                        <p class="text-xs font-bold text-slate-400">Card ${flashcardSession.currentIdx+1}/${flashcardSession.words.length}</p>
-                        <span class="text-sky-500 font-bold text-xs uppercase">Recall</span>
-                    </div>
-                    <div class="flashcard-container mb-12">
-                        <div id="card-inner" class="flashcard-inner" onclick="this.classList.toggle('is-flipped')">
-                            <div class="flashcard-front">
-                                <span class="text-7xl mb-8">${data.emoji || '📖'}</span>
-                                <h3 class="text-5xl font-black text-slate-900 tracking-tighter">${data.word}</h3>
+                    notes.forEach(n => {
+                        listContainer.innerHTML += `
+                            <div class="p-8 border-2 border-slate-50 rounded-3xl bg-white shadow-sm mb-6 transition-all hover:shadow-md">
+                                <h3 class="text-2xl font-extrabold text-slate-900 mb-2">
+                                    ${n.word} ${n.emoji || ""}
+                                </h3>
+                                <p class="text-slate-700 font-medium text-lg leading-relaxed mb-3">
+                                    ${n.meaning_en}
+                                </p>
+                                <p class="text-xl font-bold text-sky-600 font-kannada">
+                                    ಕನ್ನಡ: ${n.meaning_kn}
+                                </p>
                             </div>
-                            <div class="flashcard-back text-left items-start justify-start">
-                                <h4 class="text-sky-500 font-bold text-xs uppercase mb-4 tracking-widest">Meaning</h4>
-                                <p class="text-xl font-bold text-slate-900 mb-2 leading-tight">${data.meaning_english || ''}</p>
-                                <p class="text-2xl font-bold text-sky-600 font-kannada">${data.meaning_kannada || ''}</p>
-                            </div>
+                        `;
+                    });
+                })
+                .catch(err => {
+                    listContainer.innerHTML = `
+                        <div class="p-10 text-center border-2 border-dashed border-slate-200 rounded-3xl">
+                            <p class="text-slate-400 font-bold">Notes coming soon</p>
+                            <p class="text-xs text-slate-300 mt-2">Could not load: ./general-english/vocabulary/level-1.json</p>
                         </div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-4 w-full max-w-md">
-                        <button onclick="submitFlashcard('${data.word}', 'hard')" class="p-4 bg-white border border-slate-100 rounded-2xl font-bold text-slate-400 hover:text-red-500 transition-all">Hard</button>
-                        <button onclick="submitFlashcard('${data.word}', 'good')" class="p-4 bg-white border border-slate-100 rounded-2xl font-bold text-slate-400 hover:text-sky-500 transition-all">Good</button>
-                        <button onclick="submitFlashcard('${data.word}', 'easy')" class="p-4 bg-white border border-slate-100 rounded-2xl font-bold text-slate-400 hover:text-emerald-500 transition-all">Easy</button>
-                    </div>
-                </div>
-            `;
+                    `;
+                    console.error(err);
+                });
         }
-
-        window.submitFlashcard = (word, diff) => {
-            const progress = JSON.parse(localStorage.getItem(FLASHCARD_KEY) || '{}');
-            let nextReview = Date.now();
-            if (diff === 'good') nextReview += (24 * 60 * 60 * 1000);
-            else if (diff === 'easy') nextReview += (3 * 24 * 60 * 60 * 1000);
-            progress[word] = { nextReview, difficulty: diff };
-            localStorage.setItem(FLASHCARD_KEY, JSON.stringify(progress));
-
-            flashcardSession.currentIdx++;
-            if (flashcardSession.currentIdx < flashcardSession.words.length) renderFlashcardUI();
-            else renderNotes('synonyms', flashcardSession.levelId);
-        };
-
-        window.showMessage = (msg) => {
-            const el = document.getElementById('ui-message');
-            el.innerText = msg; el.classList.remove('hidden');
-            setTimeout(() => el.classList.add('hidden'), 4000);
-        };
     </script>
 </body>
 </html>
