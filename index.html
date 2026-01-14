@@ -3,207 +3,556 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrepEase | Your Ultimate Exam Companion</title>
+    <title>PrepEase | Karnataka & SSC Exam Mastery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            scroll-behavior: smooth;
-        }
+        :root { scroll-behavior: smooth; }
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #ffffff; 
+            background-color: #f8fafc; 
             color: #0f172a; 
             overflow-x: hidden; 
         }
         
-        /* Premium UI Tokens */
         .hero-gradient {
-            background: radial-gradient(circle at 70% 20%, rgba(14, 165, 233, 0.1), transparent),
-                        radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.05), transparent);
+            background: radial-gradient(circle at 100% 0%, rgba(67, 56, 202, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            background-color: #ffffff;
         }
 
         .premium-card {
-            @apply bg-white border border-slate-100 rounded-[2.5rem] p-8 transition-all duration-300;
-            box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.05);
+            @apply bg-white border border-slate-200 rounded-[2rem] p-8 transition-all duration-500 cursor-pointer;
+            box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.03);
         }
 
         .premium-card:hover {
             @apply -translate-y-2;
-            box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.15);
-            border-color: rgba(14, 165, 233, 0.3);
-        }
-        
-        .btn-primary { 
-            @apply px-10 py-5 bg-sky-500 text-white font-extrabold rounded-full shadow-2xl shadow-sky-200 hover:bg-sky-600 hover:-translate-y-1 active:scale-95 transition-all cursor-pointer inline-block; 
-        }
-        
-        .animate-page { 
-            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
-        }
-        
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(30px); } 
-            to { opacity: 1; transform: translateY(0); } 
+            box-shadow: 0 20px 30px -10px rgba(67, 56, 202, 0.12);
+            border-color: rgba(67, 56, 202, 0.3);
         }
 
-        .hidden { display: none !important; }
+        /* VIEW TRANSITIONS */
+        .view-transition {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* BOX LOGO GROWTH ANIMATION */
+        @keyframes box-growth {
+            0% { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
+            100% { transform: scaleY(1); opacity: 1; transform-origin: bottom; }
+        }
+
+        @keyframes p-draw {
+            0% { stroke-dashoffset: 80; opacity: 0; }
+            100% { stroke-dashoffset: 0; opacity: 1; }
+        }
+
+        .logo-box {
+            animation: box-growth 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .logo-p {
+            stroke-dasharray: 80;
+            stroke-dashoffset: 80;
+            animation: p-draw 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .logo-dot {
+            animation: fadeInUp 0.5s ease-out forwards;
+            animation-delay: 1.2s;
+            opacity: 0;
+        }
+
+        /* MOTIVATIONAL BAR */
+        .fade-out { opacity: 0; transform: translateY(-10px); transition: all 0.5s ease; }
+        .fade-in { opacity: 1; transform: translateY(0); transition: all 0.5s ease; }
+
+        .font-kannada { line-height: 1.6; }
+        input:focus { outline: none; border-color: #4338ca; }
+        
+        .otp-input {
+            @apply w-12 h-14 text-center text-2xl font-bold border-2 border-slate-200 rounded-xl focus:border-indigo-600 transition-all bg-slate-50;
+        }
+
+        .progress-bar-fill {
+            transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-white">
+<body>
+
+    <!-- TOP MOTIVATIONAL BAR -->
+    <div id="moto-bar" class="fixed top-0 w-full z-[60] bg-slate-900 text-white py-2.5 overflow-hidden border-b border-white/10 shadow-xl">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <span id="moto-text" class="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] inline-block">
+                Consistency is the key to Selection. 🎯
+            </span>
+        </div>
+    </div>
 
     <!-- NAVIGATION -->
-    <nav class="border-b border-slate-50 py-6 px-6 md:px-12 flex justify-between items-center bg-white/80 sticky top-0 z-50 backdrop-blur-xl">
-        <div onclick="window.location.reload()" class="flex items-center gap-3 cursor-pointer group">
-            <div class="w-10 h-10 bg-sky-500 rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-sky-200 group-hover:rotate-6 transition-all">P</div>
-            <span class="text-2xl font-extrabold text-slate-900 tracking-tighter">PrepEase</span>
-        </div>
-        <div class="flex items-center gap-8">
-            <a href="#notesSection" class="text-sm font-bold text-slate-500 hover:text-sky-500 transition-all">Study Hub</a>
-            <a href="#contactSection" class="text-sm font-bold text-slate-500 hover:text-sky-500 transition-all">Get Help</a>
-            <button onclick="goDashboard()" class="text-sm font-extrabold text-sky-500 hover:text-sky-600 transition-all">Dashboard</button>
+    <nav class="fixed top-[44px] w-full z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- P IN BOX LOGO -->
+            <div class="flex items-center gap-4 group cursor-pointer" onclick="navigateTo('home')">
+                <div class="relative flex items-center justify-center">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect class="logo-box" width="40" height="40" rx="8" fill="#4338ca"/>
+                        <path class="logo-p" d="M14 28V12H22C24.7614 12 27 14.2386 27 17C27 19.7614 24.7614 22 22 22H14" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle class="logo-dot" cx="32" cy="8" r="3" fill="#10b981" />
+                    </svg>
+                </div>
+                <div class="flex flex-col leading-none">
+                    <span class="text-xl font-black tracking-tighter text-slate-900 group-hover:text-indigo-600 transition-colors uppercase">PrepEase</span>
+                    <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-[0.2em]">Excellence Academy</span>
+                </div>
+            </div>
+            
+            <div id="nav-links" class="hidden md:flex items-center gap-8">
+                <button onclick="navigateTo('home')" class="text-sm font-semibold text-slate-600 hover:text-indigo-700 transition-colors">Dashboard</button>
+                <button onclick="navigateTo('doubts')" class="text-sm font-semibold text-slate-600 hover:text-indigo-700 transition-colors">Support</button>
+                <div class="h-4 w-px bg-slate-200"></div>
+                <div id="auth-status"></div>
+            </div>
         </div>
     </nav>
 
-    <!-- 1️⃣ HERO SECTION -->
-    <section id="landingView" class="hero-gradient min-h-[90vh] flex items-center">
-        <div class="max-w-6xl mx-auto px-6 py-20 text-center animate-page">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-sky-50 text-sky-600 text-xs font-bold rounded-full mb-8 border border-sky-100 uppercase tracking-widest">
-                🚀 Prepare for FDA, SDA & SSC
-            </div>
-            <h1 class="text-6xl md:text-[5.5rem] font-black text-slate-900 leading-[0.95] mb-8 tracking-tighter">
-                PrepEase — Your <br><span class="text-sky-500">Ultimate Exam Companion.</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-500 leading-relaxed mb-12 max-w-2xl mx-auto">
-                Learn smarter, faster, and more efficiently with our pattern-focused study materials and scientific memory tools.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
-                <a href="#notesSection" onclick="loadPremiumNotes()" class="btn-primary text-lg px-12">Get Started</a>
-                <button onclick="goDashboard()" class="px-10 py-5 text-slate-600 font-bold hover:text-sky-500 transition-all">View Dashboard ➜</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2️⃣ NOTES SECTION -->
-    <section id="notesSection" class="py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
-                <div class="max-w-xl">
-                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4">Master Vocabulary</h2>
-                    <p class="text-lg text-slate-500">Bilingual notes decoded for maximum retention.</p>
-                </div>
-                <div id="notesCount" class="px-6 py-3 bg-slate-50 rounded-2xl border border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-widest">
-                    Level 1 Hub
-                </div>
-            </div>
-
-            <!-- Notes Grid -->
-            <div id="notesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Data is loaded here via JS -->
-                 <div class="col-span-full text-center py-20 text-slate-300">
-                    Click "Get Started" to load study material
-                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3️⃣ CONTACT SECTION -->
-    <section id="contactSection" class="py-32 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="bg-white p-12 md:p-20 rounded-[3rem] shadow-xl border border-slate-100 text-center relative overflow-hidden">
-                <div class="relative z-10">
-                    <div class="w-20 h-20 bg-sky-100 rounded-3xl flex items-center justify-center text-sky-600 text-3xl mx-auto mb-8">🤔</div>
-                    <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-6">Have any Doubts?</h2>
-                    <p class="text-lg text-slate-500 mb-10 max-w-md mx-auto">
-                        Don't let confusion stop your progress. If you have any questions regarding the topics, reach out to our mentor team.
-                    </p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a href="mailto:support@prepease.com" class="px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all">Email Support</a>
-                        <a href="#" class="px-8 py-4 border-2 border-slate-100 text-slate-600 font-bold rounded-2xl hover:bg-slate-50 transition-all">Join WhatsApp Group</a>
-                    </div>
-                </div>
-                <!-- Ambient Background Decor -->
-                <div class="absolute -top-20 -right-20 w-64 h-64 bg-sky-50 rounded-full blur-3xl opacity-50"></div>
-                <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-indigo-50 rounded-full blur-3xl opacity-50"></div>
-            </div>
-        </div>
-    </section>
+    <!-- MAIN APP CONTAINER -->
+    <main id="app-shell" class="pt-[124px] min-h-screen">
+        <!-- Dynamic Views -->
+    </main>
 
     <!-- FOOTER -->
-    <footer class="bg-white py-20 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex items-center justify-center gap-3 mb-8">
-                <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center text-white font-black text-sm">P</div>
-                <span class="text-xl font-bold text-slate-900 tracking-tighter">PrepEase</span>
+    <footer class="py-16 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div>
+                <span class="text-lg font-black tracking-tighter text-slate-900 uppercase">PrepEase Mastery</span>
+                <p class="text-slate-400 text-xs mt-2 max-w-xs leading-relaxed">The premier roadmap for Karnataka State (FDA/SDA) & SSC central aspirants.</p>
             </div>
-            <p class="text-slate-400 text-sm">© 2026 PrepEase Education. Empowering Karnataka's Aspirants.</p>
+            <div class="flex gap-8">
+                <a href="#" class="text-slate-500 hover:text-indigo-600 font-bold text-[10px] uppercase tracking-widest transition-colors">LinkedIn</a>
+                <a href="#" class="text-slate-500 hover:text-indigo-600 font-bold text-[10px] uppercase tracking-widest transition-colors">Instagram</a>
+                <a href="#" class="text-slate-500 hover:text-indigo-600 font-bold text-[10px] uppercase tracking-widest transition-colors">Community</a>
+            </div>
         </div>
     </footer>
 
     <script>
-        // --- PREMIUM NOTES LOADER ---
-        function loadPremiumNotes() {
-            const grid = document.getElementById('notesGrid');
-            const counter = document.getElementById('notesCount');
+        // --- DATA ---
+        const quotes = [
+            "Consistency is the key to Selection. 🎯",
+            "Mastering English is half the battle won. 🇬🇧",
+            "KPSC Excellence begins with everyday habits. 🏛️",
+            "Your hard work today is your officer rank tomorrow. 🇮🇳",
+            "Focus on the mission, not the competition. ⚔️"
+        ];
+        
+        const topicsData = {
+            grammar: [
+                { id: 'nouns', title: 'Nouns & Classes', icon: '🔡', progress: 40 },
+                { id: 'tenses', title: 'Tense Mastery', icon: '⏳', progress: 10 },
+                { id: 'articles', title: 'Article Rules', icon: '🅰️', progress: 0 },
+                { id: 'voice', title: 'Passive/Active', icon: '🔄', progress: 0 }
+            ],
+            vocabulary: [
+                { id: 'synonyms', title: 'Synonyms', icon: '📖', progress: 60 },
+                { id: 'antonyms', title: 'Antonyms', icon: '🌓', progress: 20 },
+                { id: 'idioms', title: 'Idioms & Phrases', icon: '🎭', progress: 0 },
+                { id: 'substitution', title: 'One Word Substitutes', icon: '1️⃣', progress: 0 }
+            ]
+        };
+
+        // --- APP STATE ---
+        const state = {
+            view: 'home',
+            isAuthenticated: false,
+            phoneNumber: '',
+            userName: '',
+            intendedView: null, // Stores view user wanted to access before login
+            intendedParams: {},
+            currentCategory: null,
+            currentType: null,
+            currentTopic: null,
+            currentLevel: null,
+            studyMode: 'notes'
+        };
+
+        // --- NAVIGATION ENGINE ---
+        function navigateTo(view, params = {}) {
+            const protectedViews = ['english-selection', 'topics-grid', 'levels-grid', 'content-view', 'exams-pyq'];
             
-            grid.innerHTML = `
-                <div class="col-span-full py-20 text-center animate-pulse">
-                    <div class="w-12 h-12 border-4 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p class="text-slate-400 font-bold uppercase tracking-widest text-xs">Syncing Level 1 Database...</p>
+            if (protectedViews.includes(view) && !state.isAuthenticated) {
+                state.intendedView = view;
+                state.intendedParams = params;
+                state.view = 'login';
+            } else {
+                state.view = view;
+            }
+            Object.assign(state, params);
+            render();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- AUTH HANDLERS ---
+        function handleSendOTP(event) {
+            event.preventDefault();
+            const name = document.getElementById('name-input').value;
+            const phone = document.getElementById('phone-input').value;
+            if (name.length < 2 || phone.length !== 10) return alert("Valid Name & 10-digit Phone required.");
+            state.userName = name;
+            state.phoneNumber = phone;
+            navigateTo('otp-verify');
+        }
+
+        function handleVerifyOTP(event) {
+            event.preventDefault();
+            state.isAuthenticated = true;
+            
+            // Sync logic: Redirect to intended view after login
+            if (state.intendedView) {
+                const target = state.intendedView;
+                const params = state.intendedParams;
+                state.intendedView = null;
+                state.intendedParams = {};
+                navigateTo(target, params);
+            } else {
+                navigateTo('home');
+            }
+        }
+
+        function setupOTPInput() {
+            const inputs = document.querySelectorAll('.otp-input');
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+            });
+        }
+
+        // --- RENDERING ENGINE ---
+        function render() {
+            const shell = document.getElementById('app-shell');
+            const authStatus = document.getElementById('auth-status');
+            
+            if (state.isAuthenticated) {
+                authStatus.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="hidden lg:flex flex-col items-end leading-none">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Aspirant Rank 1</span>
+                            <span class="text-sm font-bold text-indigo-700">Hi, ${state.userName.split(' ')[0]}</span>
+                        </div>
+                        <button onclick="logout()" class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center border border-indigo-100 hover:bg-red-50 hover:text-red-500 transition-colors">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                        </button>
+                    </div>
+                `;
+            } else {
+                authStatus.innerHTML = `<button onclick="navigateTo('login')" class="px-6 py-2.5 text-xs font-bold bg-indigo-600 text-white rounded-full hover:bg-indigo-700 shadow-lg shadow-indigo-100 transition-all">Sign In</button>`;
+            }
+
+            switch(state.view) {
+                case 'home': shell.innerHTML = renderHome(); break;
+                case 'login': shell.innerHTML = renderLogin(); break;
+                case 'otp-verify': shell.innerHTML = renderOTPVerify(); setupOTPInput(); break;
+                case 'english-selection': shell.innerHTML = renderEnglishSelection(); break;
+                case 'topics-grid': shell.innerHTML = renderTopicsGrid(); break;
+                case 'levels-grid': shell.innerHTML = renderLevelsGrid(); break;
+                case 'content-view': shell.innerHTML = renderContentView(); loadContent(); break;
+                case 'exams-pyq': shell.innerHTML = renderExamsPYQ(); break;
+                case 'doubts': shell.innerHTML = renderDoubts(); break;
+            }
+        }
+
+        function logout() { state.isAuthenticated = false; navigateTo('home'); }
+
+        // --- TEMPLATES ---
+        function renderHome() {
+            const dashboard = state.isAuthenticated ? `
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                    <div class="bg-slate-900 p-8 rounded-[2.5rem] text-white shadow-xl flex items-center justify-between">
+                        <div><p class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-1">Modules Mastered</p><h3 class="text-3xl font-black">12</h3></div>
+                        <div class="text-4xl">📚</div>
+                    </div>
+                    <div class="bg-indigo-600 p-8 rounded-[2.5rem] text-white shadow-xl flex items-center justify-between">
+                        <div><p class="text-xs font-bold text-indigo-200 uppercase tracking-widest mb-1">Current Streak</p><h3 class="text-3xl font-black">12 Days</h3></div>
+                        <div class="text-4xl">🔥</div>
+                    </div>
+                    <div class="bg-emerald-500 p-8 rounded-[2.5rem] text-white shadow-xl flex items-center justify-between">
+                        <div><p class="text-xs font-bold text-emerald-100 uppercase tracking-widest mb-1">Success Rate</p><h3 class="text-3xl font-black">88%</h3></div>
+                        <div class="text-4xl">🎯</div>
+                    </div>
+                </div>
+            ` : '';
+
+            return `
+                <div class="hero-gradient pt-16 pb-32 px-6 view-transition">
+                    <div class="max-w-7xl mx-auto">
+                        <div class="text-center mb-16">
+                            <span class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-700 text-[10px] font-black rounded-full mb-6 border border-indigo-100 uppercase tracking-widest">Selected Roadmap 2026</span>
+                            <h1 class="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6 leading-[1.1]">
+                                ${state.isAuthenticated ? `Hello, <span class="text-indigo-600">${state.userName.split(' ')[0]}!</span><br>Access your tracks below.` : `Secure Your <span class="text-indigo-600 italic">Officer Rank.</span>`}
+                            </h1>
+                            <p class="text-lg text-slate-500 max-w-2xl mx-auto font-medium">Focused study paths for Karnataka FDA/SDA and SSC exams. Choose a topic to begin mastery.</p>
+                        </div>
+                        
+                        ${dashboard}
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div onclick="navigateTo('english-selection', {currentCategory: 'General English'})" class="premium-card group">
+                                <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all">🇬🇧</div>
+                                <h3 class="text-2xl font-bold mb-2">General English</h3>
+                                <p class="text-slate-500 text-sm mb-6 leading-relaxed">Levels 1-10 Grammar & Vocabulary mastery syllabus.</p>
+                                ${state.isAuthenticated ? 
+                                    `<div class="w-full h-1.5 bg-slate-50 rounded-full overflow-hidden"><div class="h-full bg-indigo-600 progress-bar-fill" style="width: 35%"></div></div>` :
+                                    `<span class="text-[9px] font-bold text-indigo-500 uppercase tracking-widest">Sign in to unlock</span>`
+                                }
+                            </div>
+                            <div onclick="navigateTo('exams-pyq', { currentCategory: 'karnataka' })" class="premium-card group">
+                                <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all">🏛️</div>
+                                <h3 class="text-2xl font-bold mb-2">KPSC Selection</h3>
+                                <p class="text-slate-500 text-sm mb-6">FDA, SDA and Group-C specific pattern analysis and notes.</p>
+                                <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">PYQ Archives Sync</span>
+                            </div>
+                            <div onclick="navigateTo('exams-pyq', { currentCategory: 'ssc' })" class="premium-card group">
+                                <div class="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition-all">⚔️</div>
+                                <h3 class="text-2xl font-bold mb-2">SSC central Hub</h3>
+                                <p class="text-slate-500 text-sm mb-6">CGL and CHSL focused bilingual archives and PYQ practice.</p>
+                                <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Tier 1 & 2 Roadmap</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             `;
+        }
 
-            // FETCH FROM level1.json
-            fetch('level1.json')
-                .then(res => {
-                    if (!res.ok) throw new Error("JSON file not found");
-                    return res.json();
-                })
-                .then(data => {
-                    grid.innerHTML = "";
-                    counter.innerText = `${data.length} concepts loaded`;
-
-                    data.forEach((item, index) => {
-                        // Clean up English meaning (replace underscores with comma)
-                        const cleanedMeaning = item.meaning_english.replace(/_/g, ', ');
-                        
-                        grid.innerHTML += `
-                            <div class="premium-card animate-page" style="animation-delay: ${index * 0.05}s">
-                                <div class="flex items-center justify-between mb-6">
-                                    <span class="text-5xl drop-shadow-sm">${item.emoji || '✨'}</span>
-                                    <span class="text-[10px] font-black text-sky-500 bg-sky-50 px-3 py-1 rounded-full uppercase tracking-tighter">Vocabulary</span>
-                                </div>
-                                <h3 class="text-2xl font-black text-slate-900 mb-2 tracking-tight">
-                                    ${item.word}
-                                </h3>
-                                <p class="text-sky-600 font-extrabold text-xl mb-4 font-kannada">
-                                    ${item.meaning_kannada || ''}
-                                </p>
-                                <div class="h-0.5 w-full bg-slate-50 rounded-full mb-4"></div>
-                                <p class="text-slate-500 font-medium leading-relaxed text-sm">
-                                    ${cleanedMeaning}
-                                </p>
+        function renderLogin() {
+            return `
+                <div class="max-w-md mx-auto px-6 py-24 view-transition">
+                    <div class="text-center mb-10">
+                        <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-2">Identify Yourself</h2>
+                        <p class="text-slate-500 font-medium">To sync your topics and progress.</p>
+                    </div>
+                    <form onsubmit="handleSendOTP(event)" class="bg-white border border-slate-200 p-10 rounded-[3rem] shadow-sm">
+                        <div class="mb-6">
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Full Name</label>
+                            <input id="name-input" type="text" placeholder="Aspirant Name" class="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl font-bold text-slate-900 focus:bg-white transition-all">
+                        </div>
+                        <div class="mb-8">
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Mobile Number</label>
+                            <div class="relative">
+                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">+91</span>
+                                <input id="phone-input" type="tel" maxlength="10" placeholder="00000 00000" class="w-full pl-16 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl font-bold text-slate-900 focus:bg-white transition-all">
                             </div>
-                        `;
-                    });
-                })
-                .catch(err => {
-                    grid.innerHTML = `
-                        <div class="col-span-full py-20 text-center bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200">
-                            <div class="text-5xl mb-4">🚧</div>
-                            <h3 class="text-xl font-black text-slate-800">Connection Error</h3>
-                            <p class="text-slate-400 mt-2 max-w-xs mx-auto text-sm">Please ensure <b>level1.json</b> is uploaded to your GitHub folder.</p>
+                        </div>
+                        <button type="submit" class="w-full py-4.5 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-95">Verify Account</button>
+                    </form>
+                </div>
+            `;
+        }
+
+        function renderOTPVerify() {
+            return `
+                <div class="max-w-md mx-auto px-6 py-24 view-transition text-center">
+                    <div class="mb-10">
+                        <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-2">Auth Verification</h2>
+                        <p class="text-slate-500">Sent to <span class="font-bold text-indigo-600">+91 ${state.phoneNumber}</span></p>
+                    </div>
+                    <form onsubmit="handleVerifyOTP(event)" class="bg-white border border-slate-200 p-10 rounded-[3rem] shadow-sm">
+                        <div class="flex justify-between mb-10">
+                            <input type="text" maxlength="1" class="otp-input" autofocus>
+                            <input type="text" maxlength="1" class="otp-input">
+                            <input type="text" maxlength="1" class="otp-input">
+                            <input type="text" maxlength="1" class="otp-input">
+                        </div>
+                        <button type="submit" class="w-full py-4.5 bg-indigo-700 text-white font-bold rounded-2xl hover:bg-indigo-800 shadow-xl transition-all active:scale-95">Complete Sync</button>
+                    </form>
+                </div>
+            `;
+        }
+
+        function renderEnglishSelection() {
+            return `
+                <div class="max-w-7xl mx-auto px-6 py-20 view-transition">
+                    <button onclick="navigateTo('home')" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-indigo-600 transition-colors">← Dashboard</button>
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-12">English Preparation Tracks</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div onclick="navigateTo('topics-grid', { currentType: 'grammar' })" class="premium-card hover:border-indigo-600 group">
+                            <span class="px-3 py-1 bg-indigo-50 text-indigo-700 text-[9px] font-black rounded-full uppercase tracking-widest mb-6 inline-block">Logic Based</span>
+                            <h3 class="text-3xl font-black mb-4">Grammar Module</h3>
+                            <p class="text-slate-500 mb-8 leading-relaxed">Systematic rules for Tenses, Voice, Articles and Error spotting for KPSC patterns.</p>
+                            <span class="text-indigo-600 font-bold text-sm">Open Syllabus ➜</span>
+                        </div>
+                        <div onclick="navigateTo('topics-grid', { currentType: 'vocabulary' })" class="premium-card hover:border-emerald-500 group">
+                            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-[9px] font-black rounded-full uppercase tracking-widest mb-6 inline-block">Memory Based</span>
+                            <h3 class="text-3xl font-black mb-4">Vocabulary Hub</h3>
+                            <p class="text-slate-500 mb-8 leading-relaxed">Bilingual meanings for Synonyms, Antonyms and Idioms for max-score retention.</p>
+                            <span class="text-emerald-600 font-bold text-sm">Open Glossary ➜</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTopicsGrid() {
+            const topics = topicsData[state.currentType];
+            return `
+                <div class="max-w-7xl mx-auto px-6 py-20 view-transition">
+                    <button onclick="navigateTo('english-selection')" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-indigo-600 transition-colors">← Tracks</button>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-100 pb-8">
+                        <h2 class="text-4xl font-black text-slate-900 tracking-tighter capitalize">${state.currentType} Library</h2>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        ${topics.map(t => `
+                            <div onclick="navigateTo('levels-grid', { currentTopic: '${t.id}', currentTopicTitle: '${t.title}' })" class="premium-card p-10 group">
+                                <div class="text-5xl mb-8 group-hover:scale-125 transition-transform duration-500">${t.icon}</div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-4 tracking-tight">${t.title}</h3>
+                                <div class="w-full h-1 bg-slate-50 rounded-full overflow-hidden"><div class="h-full bg-indigo-600" style="width: ${t.progress}%"></div></div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase mt-2 tracking-widest">${t.progress}% Syllabus Sync</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLevelsGrid() {
+            return `
+                <div class="max-w-7xl mx-auto px-6 py-20 view-transition">
+                    <button onclick="navigateTo('topics-grid')" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-indigo-600 transition-colors">← Topics</button>
+                    <div class="mb-16">
+                        <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-2">${state.currentTopicTitle}</h2>
+                        <p class="text-slate-500 font-medium">Climb through 10 levels of increasing complexity.</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                        ${Array.from({length: 10}, (_, i) => i + 1).map(lv => `
+                            <div onclick="navigateTo('content-view', { currentLevel: ${lv} })" 
+                                 class="p-10 border-2 border-slate-100 rounded-[2.5rem] text-center hover:border-indigo-600 hover:shadow-2xl transition-all cursor-pointer group bg-white shadow-sm">
+                                <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block group-hover:text-indigo-600">Level</span>
+                                <span class="text-4xl font-black text-slate-900">${lv}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderContentView() {
+            return `
+                <div class="max-w-4xl mx-auto px-6 py-20 view-transition">
+                    <div class="flex items-center justify-between mb-12">
+                        <button onclick="navigateTo('levels-grid')" class="text-slate-400 font-bold flex items-center gap-2 hover:text-indigo-600 transition-colors">← Grid</button>
+                        <div class="flex bg-slate-100 p-1 rounded-2xl border border-slate-200">
+                            <button id="mode-notes" onclick="toggleStudyMode('notes')" class="px-6 py-2 rounded-xl text-xs font-bold transition-all bg-white shadow-sm text-indigo-600">Module</button>
+                            <button id="mode-test" onclick="toggleStudyMode('test')" class="px-6 py-2 rounded-xl text-xs font-bold transition-all text-slate-400">Recall</button>
+                        </div>
+                    </div>
+                    <div id="content-container"></div>
+                </div>
+            `;
+        }
+
+        function toggleStudyMode(mode) {
+            state.studyMode = mode;
+            loadContent();
+        }
+
+        function loadContent() {
+            const container = document.getElementById('content-container');
+            container.innerHTML = `<div class="flex flex-col items-center justify-center py-24"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mb-4"></div></div>`;
+            
+            setTimeout(() => {
+                if (state.studyMode === 'notes') {
+                    container.innerHTML = `
+                        <div class="mb-16">
+                            <span class="px-4 py-1.5 bg-indigo-50 text-indigo-700 text-[10px] font-bold rounded-full uppercase tracking-widest mb-6 inline-block">Verified Module</span>
+                            <h2 class="text-5xl md:text-6xl font-black text-slate-900 mb-4 tracking-tighter">Level ${state.currentLevel} Lesson</h2>
+                            <div class="h-2 w-24 bg-emerald-500 rounded-full"></div>
+                        </div>
+                        <div class="space-y-10">
+                            <div class="premium-card bg-white border-2 border-indigo-50">
+                                <div class="flex justify-between items-center mb-10">
+                                    <span class="text-6xl drop-shadow-xl">📖</span>
+                                    <span class="level-badge bg-emerald-50 text-emerald-700 border border-emerald-100 uppercase tracking-widest">Bilingual Notes</span>
+                                </div>
+                                <h3 class="text-4xl font-black text-slate-900 mb-2 tracking-tighter">Precision</h3>
+                                <p class="text-3xl font-bold text-indigo-700 font-kannada mb-8">ನಿಖರತೆ (Nikharate)</p>
+                                <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100 italic font-medium text-slate-700 leading-relaxed mb-8">
+                                    "Accuracy in grammar requires absolute precision."
+                                </div>
+                                <p class="text-slate-500 font-medium leading-relaxed">Precision means paying great attention to accuracy and detail; the quality of being exact.</p>
+                            </div>
                         </div>
                     `;
-                });
+                } else {
+                    container.innerHTML = `
+                        <div class="text-center py-20">
+                            <h3 class="text-3xl font-black text-slate-900 mb-6 tracking-tight uppercase tracking-widest">Active Recall</h3>
+                            <div class="premium-card p-24 bg-white shadow-2xl border-4 border-indigo-50 flex flex-col items-center justify-center mb-12">
+                                <span class="text-4xl font-black text-indigo-600">ನಿಖರತೆ</span>
+                                <p class="mt-12 text-slate-300 font-bold text-[10px] uppercase tracking-[0.3em]">Reveal Meaning</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }, 600);
         }
 
-        // Placeholder for Dashboard
-        function goDashboard() {
-            alert("Dashboard feature is being synchronized. Please use the Study Hub for now.");
+        function renderExamsPYQ() {
+            const isKarnataka = state.currentCategory === 'karnataka';
+            return `
+                <div class="max-w-7xl mx-auto px-6 py-20 view-transition">
+                    <button onclick="navigateTo('home')" class="text-slate-400 font-bold mb-8 flex items-center gap-2 hover:text-indigo-600 transition-colors">← Dashboard</button>
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-12 capitalize">${state.currentCategory} Question Bank</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="premium-card flex justify-between items-center group">
+                            <div><h3 class="text-2xl font-bold text-slate-900 mb-1">Archives 2024</h3><p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">New Set Added</p></div>
+                            <div class="w-14 h-14 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
+
+        function renderDoubts() {
+            return `<div class="max-w-3xl mx-auto px-6 py-20 text-center view-transition"><div class="w-24 h-24 bg-emerald-50 text-emerald-600 rounded-[2.5rem] flex items-center justify-center text-4xl mx-auto mb-8 shadow-sm">💡</div><h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-12">Support Channel</h2><div class="bg-white border border-slate-200 p-12 rounded-[3rem] shadow-sm text-left"><p class="text-xl font-bold text-indigo-700 mb-8">Telegram: @PrepEase_Academy</p><p class="text-xl font-bold text-slate-900">Email: help@prepease.com</p></div><button onclick="navigateTo('home')" class="mt-12 py-5 px-10 bg-indigo-600 text-white font-bold rounded-[2rem] hover:bg-indigo-700 shadow-xl transition-all">Back to Dashboard</button></div>`;
+        }
+
+        // --- MOTTO CYCLE ---
+        let quoteIndex = 0;
+        setInterval(() => {
+            const el = document.getElementById('moto-text');
+            if (!el) return;
+            el.className = "text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] inline-block fade-out";
+            setTimeout(() => {
+                quoteIndex = (quoteIndex + 1) % quotes.length;
+                el.innerText = quotes[quoteIndex];
+                el.className = "text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] inline-block fade-in";
+            }, 500);
+        }, 5000);
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', render);
     </script>
 </body>
 </html>
