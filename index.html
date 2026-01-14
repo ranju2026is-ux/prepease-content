@@ -80,10 +80,6 @@
         .font-kannada { line-height: 1.6; }
         input:focus { outline: none; border-color: #4338ca; }
         
-        .otp-input {
-            @apply w-12 h-14 text-center text-2xl font-bold border-2 border-slate-200 rounded-xl focus:border-indigo-600 transition-all bg-slate-50;
-        }
-
         .progress-bar-fill {
             transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -180,7 +176,6 @@
         const state = {
             view: 'home',
             isAuthenticated: false,
-            phoneNumber: '',
             userName: '',
             intendedView: null, // Stores view user wanted to access before login
             intendedParams: {},
@@ -208,18 +203,12 @@
         }
 
         // --- AUTH HANDLERS ---
-        function handleSendOTP(event) {
+        function handleLogin(event) {
             event.preventDefault();
             const name = document.getElementById('name-input').value;
-            const phone = document.getElementById('phone-input').value;
-            if (name.length < 2 || phone.length !== 10) return alert("Valid Name & 10-digit Phone required.");
+            if (name.trim().length < 2) return alert("Please enter your name to proceed.");
+            
             state.userName = name;
-            state.phoneNumber = phone;
-            navigateTo('otp-verify');
-        }
-
-        function handleVerifyOTP(event) {
-            event.preventDefault();
             state.isAuthenticated = true;
             
             // Sync logic: Redirect to intended view after login
@@ -232,22 +221,6 @@
             } else {
                 navigateTo('home');
             }
-        }
-
-        function setupOTPInput() {
-            const inputs = document.querySelectorAll('.otp-input');
-            inputs.forEach((input, index) => {
-                input.addEventListener('input', (e) => {
-                    if (e.target.value.length === 1 && index < inputs.length - 1) {
-                        inputs[index + 1].focus();
-                    }
-                });
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
-                        inputs[index - 1].focus();
-                    }
-                });
-            });
         }
 
         // --- RENDERING ENGINE ---
@@ -274,7 +247,6 @@
             switch(state.view) {
                 case 'home': shell.innerHTML = renderHome(); break;
                 case 'login': shell.innerHTML = renderLogin(); break;
-                case 'otp-verify': shell.innerHTML = renderOTPVerify(); setupOTPInput(); break;
                 case 'english-selection': shell.innerHTML = renderEnglishSelection(); break;
                 case 'topics-grid': shell.innerHTML = renderTopicsGrid(); break;
                 case 'levels-grid': shell.innerHTML = renderLevelsGrid(); break;
@@ -284,7 +256,7 @@
             }
         }
 
-        function logout() { state.isAuthenticated = false; navigateTo('home'); }
+        function logout() { state.isAuthenticated = false; state.userName = ''; navigateTo('home'); }
 
         // --- TEMPLATES ---
         function renderHome() {
@@ -350,42 +322,15 @@
             return `
                 <div class="max-w-md mx-auto px-6 py-24 view-transition">
                     <div class="text-center mb-10">
-                        <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-2">Identify Yourself</h2>
-                        <p class="text-slate-500 font-medium">To sync your topics and progress.</p>
+                        <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-2">Welcome Back</h2>
+                        <p class="text-slate-500 font-medium">Please enter your name to begin.</p>
                     </div>
-                    <form onsubmit="handleSendOTP(event)" class="bg-white border border-slate-200 p-10 rounded-[3rem] shadow-sm">
-                        <div class="mb-6">
-                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Full Name</label>
-                            <input id="name-input" type="text" placeholder="Aspirant Name" class="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl font-bold text-slate-900 focus:bg-white transition-all">
-                        </div>
+                    <form onsubmit="handleLogin(event)" class="bg-white border border-slate-200 p-10 rounded-[3rem] shadow-sm">
                         <div class="mb-8">
-                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Mobile Number</label>
-                            <div class="relative">
-                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">+91</span>
-                                <input id="phone-input" type="tel" maxlength="10" placeholder="00000 00000" class="w-full pl-16 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl font-bold text-slate-900 focus:bg-white transition-all">
-                            </div>
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Your Full Name</label>
+                            <input id="name-input" type="text" placeholder="Aspirant Name" class="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl font-bold text-slate-900 focus:bg-white transition-all" required>
                         </div>
-                        <button type="submit" class="w-full py-4.5 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-95">Verify Account</button>
-                    </form>
-                </div>
-            `;
-        }
-
-        function renderOTPVerify() {
-            return `
-                <div class="max-w-md mx-auto px-6 py-24 view-transition text-center">
-                    <div class="mb-10">
-                        <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-2">Auth Verification</h2>
-                        <p class="text-slate-500">Sent to <span class="font-bold text-indigo-600">+91 ${state.phoneNumber}</span></p>
-                    </div>
-                    <form onsubmit="handleVerifyOTP(event)" class="bg-white border border-slate-200 p-10 rounded-[3rem] shadow-sm">
-                        <div class="flex justify-between mb-10">
-                            <input type="text" maxlength="1" class="otp-input" autofocus>
-                            <input type="text" maxlength="1" class="otp-input">
-                            <input type="text" maxlength="1" class="otp-input">
-                            <input type="text" maxlength="1" class="otp-input">
-                        </div>
-                        <button type="submit" class="w-full py-4.5 bg-indigo-700 text-white font-bold rounded-2xl hover:bg-indigo-800 shadow-xl transition-all active:scale-95">Complete Sync</button>
+                        <button type="submit" class="w-full py-4.5 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-95">Start Learning</button>
                     </form>
                 </div>
             `;
