@@ -1,21 +1,152 @@
-{
-  "notes": [
-    {
-      "word": "Abundant",
-      "meaning": "ಪ್ರಚುರ",
-      "example": "Abundant water is available."
-    },
-    {
-      "word": "Benevolent",
-      "meaning": "ದಯಾಳು",
-      "example": "She is a benevolent teacher."
-    }
-  ],
-  "question": {
-    "question": "Meaning of 'Abundant'?",
-    "options": ["ಕಡಿಮೆ", "ಪ್ರಚುರ", "ಸಾಮಾನ್ಯ", "ಅಪರಿಚಿತ"],
-    "answer": "ಪ್ರಚುರ",
-    "explanation": "Abundant means plenty. Kannada meaning: ಪ್ರಚುರ."
+[
+  {
+    "word": "Genuine",
+    "meaning_english": "Real_Authentic_Original_True_Legitimate_Valid",
+    "meaning_kannada": "ನೈಜ",
+    "emoji": "✅"
+  },
+  {
+    "word": "Summit",
+    "meaning_english": "Top_Peak_Pinnacle_Apex_Zenith_Crest",
+    "meaning_kannada": "ಶಿಖರ",
+    "emoji": "🏔️"
+  },
+  {
+    "word": "Careful",
+    "meaning_english": "Cautious_Wary_Alert_Prudent_Watchful_Guarded",
+    "meaning_kannada": "ಜಾಗರೂಕ",
+    "emoji": "⚠️"
+  },
+  {
+    "word": "Healthy",
+    "meaning_english": "Fit_Robust_Sound_Wholesome_Vigorous_Well",
+    "meaning_kannada": "ಆರೋಗ್ಯಕರ",
+    "emoji": "🍎"
+  },
+  {
+    "word": "Magic",
+    "meaning_english": "Wizardry_Sorcery_Spell_Charm_Enchantment_Occult",
+    "meaning_kannada": "ಮಂತ್ರಜಾಲ",
+    "emoji": "🪄"
+  },
+  {
+    "word": "Trouble",
+    "meaning_english": "Distress_Worry_Problem_Difficulty_Ordeal_Woe",
+    "meaning_kannada": "ತೊಂದರೆ",
+    "emoji": "😟"
+  },
+  {
+    "word": "Angry",
+    "meaning_english": "Irate_Furious_Enraged_Cross_Mad_Wrathful",
+    "meaning_kannada": "ಕೋಪ",
+    "emoji": "😡"
+  },
+  {
+    "word": "Delight",
+    "meaning_english": "Joy_Glee_Pleasure_Bliss_Happiness_Rapture",
+    "meaning_kannada": "ಆನಂದ",
+    "emoji": "😊"
+  },
+  {
+    "word": "Shout",
+    "meaning_english": "Yell_Scream_Cry_Roar_Call_Holler",
+    "meaning_kannada": "ಕಿರುಚು",
+    "emoji": "📢"
+  },
+  {
+    "word": "Sad",
+    "meaning_english": "Unhappy_Gloomy_Dejected_Morose_Sorrowful_Blue",
+    "meaning_kannada": "ದುಃಖ",
+    "emoji": "😢"
+  },
+  {
+    "word": "Weep",
+    "meaning_english": "Cry_Sob_Shed_Mourn_Wail_Lament",
+    "meaning_kannada": "ಅಳು",
+    "emoji": "😭"
+  },
+  {
+    "word": "Silent",
+    "meaning_english": "Quiet_Mute_Still_Noiseless_Soundless_Hushed",
+    "meaning_kannada": "ಮೌನ",
+    "emoji": "🙊"
+  },
+  {
+    "word": "Damage",
+    "meaning_english": "Harm_Injury_Ruin_Loss_Wreck_Mar",
+    "meaning_kannada": "ಹಾನಿ",
+    "emoji": "🏚️"
+  },
+  {
+    "word": "Permission",
+    "meaning_english": "Consent_Leave_Allow_Permit_Liberty_Sanction",
+    "meaning_kannada": "ಅನುಮತಿ",
+    "emoji": "🎫"
+  },
+  {
+    "word": "Tight",
+    "meaning_english": "Firm_Taut_Fixed_Close_Secure_Rigid",
+    "meaning_kannada": "ಬಿಗಿಯಾದ",
+    "emoji": "🔩"
+  },
+  {
+    "word": "Fast",
+    "meaning_english": "Quick_Rapid_Swift_Fleet_Brisk_Speedy",
+    "meaning_kannada": "ವೇಗ",
+    "emoji": "⚡"
+  },
+  {
+    "word": "Truth",
+    "meaning_english": "Fact_Reality_Veracity_Honesty_Actual_Exact",
+    "meaning_kannada": "ಸತ್ಯ",
+    "emoji": "⚖️"
+  },
+  {
+    "word": "Stopped",
+    "meaning_english": "Paused_Ceased_Halted_Finished_End_Dead",
+    "meaning_kannada": "ನಿಲ್ಲಿಸಿದ",
+    "emoji": "🛑"
+  },
+  {
+    "word": "Sick",
+    "meaning_english": "Ill_Unwell_Ailing_Diseased_Frail_Weak",
+    "meaning_kannada": "ಕಾಯಿಲೆ",
+    "emoji": "🤒"
+  },
+  {
+    "word": "Rich",
+    "meaning_english": "Wealthy_Affluent_Opulent_Moneyed_Lush_Loaded",
+    "meaning_kannada": "ಶ್ರೀಮಂತ",
+    "emoji": "💰"
+  },
+  {
+    "word": "Clever",
+    "meaning_english": "Smart_Bright_Sharp_Intelligent_Brainy_Able",
+    "meaning_kannada": "ಚತುರ",
+    "emoji": "💡"
+  },
+  {
+    "word": "Brave",
+    "meaning_english": "Bold_Daring_Fearless_Valiant_Heroic_Gutsy",
+    "meaning_kannada": "ಧೈರ್ಯ",
+    "emoji": "🦁"
+  },
+  {
+    "word": "Ban",
+    "meaning_english": "Forbid_Prohibit_Bar_Veto_Block_Halt",
+    "meaning_kannada": "ನಿಷೇಧ",
+    "emoji": "🚫"
+  },
+  {
+    "word": "Accept",
+    "meaning_english": "Agree_Admit_Acknowledge_Receive_Take_Grant",
+    "meaning_kannada": "ಒಪ್ಪಿಕೊ",
+    "emoji": "🤝"
+  },
+  {
+    "word": "Reject",
+    "meaning_english": "Refuse_Decline_Deny_Veto_Discard_Snub",
+    "meaning_kannada": "ತಿರಸ್ಕರಿಸು",
+    "emoji": "❌"
   }
-}
-
+]
