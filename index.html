@@ -164,7 +164,9 @@
                 { id: 'articles', title: 'Articles', icon: '🅰️' },
                 { id: 'prepositions', title: 'Prepositions', icon: '📍' },
                 { id: 'subject-verb', title: 'Subject-Verb Agreement', icon: '⚖️' },
-                { id: 'active-passive', title: 'Active/Passive', icon: '🔄' }
+                { id: 'conjunctions', title: 'Conjunctions', icon: '🔗' },
+                { id: 'active-passive', title: 'Active/Passive', icon: '🔄' },
+                { id: 'direct-indirect', title: 'Direct/Indirect', icon: '💬' }
             ],
             vocabulary: [
                 { id: 'synonyms', title: 'Synonyms', icon: '📖' },
@@ -181,7 +183,7 @@
             userName: '',
             intendedView: null,
             intendedParams: {},
-            currentType: null,
+            currentType: null, // 'grammar' or 'vocabulary'
             currentTopic: null,
             currentLevel: null
         };
@@ -309,7 +311,7 @@
                     <h2 class="text-5xl font-black text-slate-900 tracking-tighter mb-16">Preparation Tracks</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div onclick="navigateTo('topics-grid', { currentType: 'grammar' })" class="premium-card hover:border-indigo-600 group">
-                            <span class="px-4 py-1.5 bg-indigo-50 text-indigo-700 text-[10px] font-black rounded-full uppercase tracking-widest mb-8 inline-block">Rule Based Track</span>
+                            <span class="px-4 py-1.5 bg-indigo-50 text-indigo-700 text-[9px] font-black rounded-full uppercase tracking-widest mb-8 inline-block">Rule Based Track</span>
                             <h3 class="text-4xl font-black mb-4 tracking-tight">English Grammar</h3>
                             <p class="text-slate-500 text-lg mb-10 leading-relaxed">Complete rules, exceptions and logic for all state and central recruitment patterns.</p>
                             <span class="text-indigo-600 font-black text-xs uppercase tracking-widest">Phase 1-10 Roadmap ➜</span>
@@ -379,8 +381,9 @@
             const container = document.getElementById('content-container');
             container.innerHTML = `<div class="flex flex-col items-center justify-center py-32"><div class="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600 mb-6"></div><p class="text-slate-400 text-xs font-black uppercase tracking-[0.3em] animate-pulse">Syncing GitHub Records...</p></div>`;
             
-            // CORRECTED PATH ALIGNMENT: ./general-english/[topic]/level[n].json
-            const path = `./general-english/${state.currentTopic}/level${state.currentLevel}.json`;
+            // CORRECTED PATH ALIGNMENT: ./general-english/[type]/[topic]/level-[n].json
+            // Example: ./general-english/vocabulary/synonyms/level-1.json
+            const path = `./general-english/${state.currentType}/${state.currentTopic}/level-${state.currentLevel}.json`;
 
             try {
                 const response = await fetch(path);
