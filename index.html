@@ -112,6 +112,7 @@
                 <div class="relative flex items-center justify-center">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect class="logo-box" width="40" height="40" rx="8" fill="#4338ca"/>
+                        <!-- High Visibility P -->
                         <path class="logo-p" d="M14 28V12H22C24.7614 12 27 14.2386 27 17C27 19.7614 24.7614 22 22 22H14" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
@@ -291,7 +292,7 @@
         }
 
         function renderLogin() {
-            return `<div class="max-w-md mx-auto px-6 py-24 view-transition text-center"><h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-2">Welcome Aspirant</h2><p class="text-slate-500 mb-10 font-medium">Please enter your name to begin mastery.</p><form onsubmit="handleLogin(event)" class="bg-white border border-slate-200 p-10 rounded-[3rem] shadow-sm"><label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 text-left">Your Name</label><input id="name-input" type="text" placeholder="Aspirant Name" class="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl font-bold mb-6 focus:bg-white transition-all" required><button type="submit" class="w-full py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-xl active:scale-95 transition-all">Enter Mission Hub</button></form></div>`;
+            return `<div class="max-w-md mx-auto px-6 py-24 view-transition text-center"><h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-2">Welcome Aspirant</h2><p class="text-slate-500 mb-10 font-medium">Please enter your name to begin mastery.</p><form onsubmit="handleLogin(event)" class="bg-white border border-slate-200 p-10 rounded-[3rem] shadow-sm"><label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 text-left">Your Name</label><input id="name-input" type="text" placeholder="Aspirant Name" class="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl font-bold mb-6 focus:bg-white" required><button type="submit" class="w-full py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-xl active:scale-95 transition-all">Enter Mission Hub</button></form></div>`;
         }
 
         function renderEnglishSelection() {
@@ -309,7 +310,7 @@
                         <div onclick="navigateTo('topics-grid', { currentType: 'vocabulary' })" class="premium-card hover:border-emerald-500 group">
                             <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-[9px] font-black rounded-full uppercase tracking-widest mb-6 inline-block">Memory Based</span>
                             <h3 class="text-3xl font-black mb-4 tracking-tight">Vocabulary Hub</h3>
-                            <p class="text-slate-500 mb-8 leading-relaxed">Synonyms, Idioms and Antonyms with bilingual recall technology.</p>
+                            <p class="text-slate-500 mb-8 leading-relaxed">Synonyms, Antonyms and Idioms with bilingual recall technology.</p>
                             <span class="text-emerald-600 font-bold text-sm uppercase tracking-widest">Phase 1-10 Roadmap ➜</span>
                         </div>
                     </div>
@@ -368,12 +369,13 @@
             const container = document.getElementById('content-container');
             container.innerHTML = `<div class="flex flex-col items-center justify-center py-24"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mb-4"></div><p class="text-slate-400 text-[10px] font-bold animate-pulse uppercase tracking-widest">Syncing from GitHub...</p></div>`;
             
-            // Path structure: ./general-english/[type]/[topic]/level[n].json
-            const path = `./general-english/${state.currentType}/${state.currentTopic}/level${state.currentLevel}.json`;
+            // Path structure: ./general-english/[topic]/level[n].json
+            // Example: ./general-english/synonyms/level1.json
+            const path = `./general-english/${state.currentTopic}/level${state.currentLevel}.json`;
 
             try {
                 const response = await fetch(path);
-                if (!response.ok) throw new Error();
+                if (!response.ok) throw new Error("404");
                 const notes = await response.json();
                 renderAnkiCards(notes, path);
             } catch (err) {
@@ -381,7 +383,9 @@
                     <div class="text-center py-20 bg-white border border-slate-200 rounded-[3rem] shadow-sm">
                         <div class="text-5xl mb-6">📂</div>
                         <h3 class="text-xl font-bold text-slate-900 mb-2 tracking-tight">Milestone Offline</h3>
-                        <p class="text-slate-500 mb-8 text-sm max-w-xs mx-auto font-medium">Please ensure your file is uploaded to GitHub at:<br><code class="bg-slate-100 p-1 rounded text-indigo-600 mt-2 block">${path}</code></p>
+                        <p class="text-slate-500 mb-4 text-sm max-w-xs mx-auto font-medium">I am looking for your file at this exact location:</p>
+                        <code class="bg-slate-100 p-2 rounded text-indigo-600 mb-8 block text-xs overflow-x-auto">${path}</code>
+                        <p class="text-slate-400 text-xs mb-8">Ensure your folder is named <b>${state.currentTopic}</b> inside <b>general-english</b>.</p>
                         <button onclick="navigateTo('levels-grid')" class="px-10 py-3 bg-indigo-600 text-white font-bold rounded-xl shadow-lg active:scale-95 transition-all">Back to Roadmap</button>
                     </div>
                 `;
@@ -394,7 +398,7 @@
                 <div class="mb-16 text-center">
                     <span class="px-4 py-1 bg-indigo-50 text-indigo-700 text-[10px] font-black rounded-full uppercase tracking-widest mb-4 inline-block">Active Recall Mastery</span>
                     <h2 class="text-5xl font-black text-slate-900 tracking-tighter">Phase ${state.currentLevel} Progress</h2>
-                    <p class="text-slate-400 text-sm mt-4 uppercase tracking-tighter font-bold">Tap card to reveal detailed mapping</p>
+                    <p class="text-slate-400 text-sm mt-4 uppercase tracking-tighter font-bold">Tap card to reveal mapping</p>
                 </div>
                 <div class="grid gap-12">
             `;
@@ -431,7 +435,7 @@
                     <h3 class="text-4xl font-black mb-4 tracking-tight">Milestone Reached!</h3>
                     <p class="text-slate-400 mb-10 text-lg font-medium">You have visualized all ${notes.length} concepts in Phase ${state.currentLevel}.</p>
                     <button onclick="navigateTo('levels-grid')" class="px-12 py-5 bg-white text-slate-900 font-black rounded-2xl shadow-xl hover:bg-slate-50 transition-all uppercase tracking-widest text-xs">Unlock Next Phase</button>
-                    <div class="absolute -right-10 -bottom-10 text-white opacity-[0.03] text-9xl font-black rotate-12 group-hover:scale-110 transition-transform">PHASE ${state.currentLevel}</div>
+                    <div class="absolute -right-10 -bottom-10 text-white opacity-[0.03] text-9xl font-black rotate-12 group-hover:scale-110 transition-transform uppercase">PHASE ${state.currentLevel}</div>
                 </div>
             </div>`;
             container.innerHTML = html;
