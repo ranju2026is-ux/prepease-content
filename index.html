@@ -3,240 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrepEase | Smart Exam Preparation</title>
+    <title>PrepEase | Your Ultimate Exam Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; scroll-behavior: smooth; }
-        .level-locked { filter: grayscale(1); opacity: 0.5; cursor: not-allowed !important; pointer-events: none; }
-        .animate-page { animation: slideUp 0.4s ease-out forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .btn-primary { @apply px-8 py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all active:scale-95; }
-        .card-topic { @apply p-8 border border-slate-100 rounded-3xl bg-white shadow-sm hover:shadow-md transition-all cursor-pointer border-b-4 border-b-blue-500; }
+        :root {
+            scroll-behavior: smooth;
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #ffffff; 
+            color: #0f172a; 
+            overflow-x: hidden; 
+        }
+        
+        /* Premium UI Tokens */
+        .hero-gradient {
+            background: radial-gradient(circle at 70% 20%, rgba(14, 165, 233, 0.1), transparent),
+                        radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.05), transparent);
+        }
+
+        .premium-card {
+            @apply bg-white border border-slate-100 rounded-[2.5rem] p-8 transition-all duration-300;
+            box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.05);
+        }
+
+        .premium-card:hover {
+            @apply -translate-y-2;
+            box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.15);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+        
+        .btn-primary { 
+            @apply px-10 py-5 bg-sky-500 text-white font-extrabold rounded-full shadow-2xl shadow-sky-200 hover:bg-sky-600 hover:-translate-y-1 active:scale-95 transition-all cursor-pointer inline-block; 
+        }
+        
+        .animate-page { 
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+        }
+        
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body class="bg-white">
 
-    <!-- 1️⃣ LANDING VIEW -->
-    <section id="landingView" class="min-h-screen flex flex-col items-center justify-center px-6 text-center animate-page">
-        <div class="max-w-3xl">
-            <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl font-black mx-auto mb-8">P</div>
-            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 mb-4 tracking-tight">PrepEase</h1>
-            <p class="text-xl text-slate-500 mb-12">Smart preparation for competitive exams</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="p-6 bg-slate-50 rounded-2xl">
-                    <div class="text-2xl mb-2">📈</div>
-                    <h3 class="font-bold text-slate-800">Level-wise</h3>
-                    <p class="text-sm text-slate-500">Step-by-step mastery</p>
+    <!-- NAVIGATION -->
+    <nav class="border-b border-slate-50 py-6 px-6 md:px-12 flex justify-between items-center bg-white/80 sticky top-0 z-50 backdrop-blur-xl">
+        <div onclick="window.location.reload()" class="flex items-center gap-3 cursor-pointer group">
+            <div class="w-10 h-10 bg-sky-500 rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-sky-200 group-hover:rotate-6 transition-all">P</div>
+            <span class="text-2xl font-extrabold text-slate-900 tracking-tighter">PrepEase</span>
+        </div>
+        <div class="flex items-center gap-8">
+            <a href="#notesSection" class="text-sm font-bold text-slate-500 hover:text-sky-500 transition-all">Study Hub</a>
+            <a href="#contactSection" class="text-sm font-bold text-slate-500 hover:text-sky-500 transition-all">Get Help</a>
+            <button onclick="goDashboard()" class="text-sm font-extrabold text-sky-500 hover:text-sky-600 transition-all">Dashboard</button>
+        </div>
+    </nav>
+
+    <!-- 1️⃣ HERO SECTION -->
+    <section id="landingView" class="hero-gradient min-h-[90vh] flex items-center">
+        <div class="max-w-6xl mx-auto px-6 py-20 text-center animate-page">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-sky-50 text-sky-600 text-xs font-bold rounded-full mb-8 border border-sky-100 uppercase tracking-widest">
+                🚀 Prepare for FDA, SDA & SSC
+            </div>
+            <h1 class="text-6xl md:text-[5.5rem] font-black text-slate-900 leading-[0.95] mb-8 tracking-tighter">
+                PrepEase — Your <br><span class="text-sky-500">Ultimate Exam Companion.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-500 leading-relaxed mb-12 max-w-2xl mx-auto">
+                Learn smarter, faster, and more efficiently with our pattern-focused study materials and scientific memory tools.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                <a href="#notesSection" onclick="loadPremiumNotes()" class="btn-primary text-lg px-12">Get Started</a>
+                <button onclick="goDashboard()" class="px-10 py-5 text-slate-600 font-bold hover:text-sky-500 transition-all">View Dashboard ➜</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2️⃣ NOTES SECTION -->
+    <section id="notesSection" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
+                <div class="max-w-xl">
+                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4">Master Vocabulary</h2>
+                    <p class="text-lg text-slate-500">Bilingual notes decoded for maximum retention.</p>
                 </div>
-                <div class="p-6 bg-slate-50 rounded-2xl">
-                    <div class="text-2xl mb-2">🎯</div>
-                    <h3 class="font-bold text-slate-800">Exam-focused</h3>
-                    <p class="text-sm text-slate-500">Real pattern questions</p>
-                </div>
-                <div class="p-6 bg-slate-50 rounded-2xl">
-                    <div class="text-2xl mb-2">🧠</div>
-                    <h3 class="font-bold text-slate-800">Smart Revision</h3>
-                    <p class="text-sm text-slate-500">Active recall logic</p>
+                <div id="notesCount" class="px-6 py-3 bg-slate-50 rounded-2xl border border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                    Level 1 Hub
                 </div>
             </div>
 
-            <button onclick="goDashboard()" class="btn-primary text-lg">Start Learning</button>
-        </div>
-    </section>
-
-    <!-- 2️⃣ DASHBOARD VIEW -->
-    <section id="dashboardView" style="display:none;" class="max-w-5xl mx-auto px-6 py-12 animate-page">
-        <h2 class="text-3xl font-bold mb-8">My Dashboard</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div onclick="goCategories()" class="card-topic">
-                <div class="text-4xl mb-4">🇬🇧</div>
-                <h3 class="text-2xl font-bold mb-2">General English</h3>
-                <p class="text-slate-500">Master Grammar & Vocabulary for KPSC, SSC & more.</p>
+            <!-- Notes Grid -->
+            <div id="notesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Data is loaded here via JS -->
+                 <div class="col-span-full text-center py-20 text-slate-300">
+                    Click "Get Started" to load study material
+                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3️⃣ CATEGORY SELECTION (Grammar vs Vocab) -->
-    <section id="categoryView" style="display:none;" class="max-w-5xl mx-auto px-6 py-12 animate-page">
-        <button onclick="goDashboard()" class="text-blue-600 font-bold mb-6 flex items-center gap-2">← Back to Dashboard</button>
-        <h2 class="text-3xl font-bold mb-8">General English</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="p-8 border border-slate-100 rounded-3xl bg-slate-50 opacity-60 cursor-not-allowed">
-                <div class="text-4xl mb-4">🔡</div>
-                <h3 class="text-2xl font-bold mb-2">Grammar</h3>
-                <p class="text-slate-500">Rules & Practice (Coming Soon)</p>
-            </div>
-            <div onclick="goVocabulary()" class="card-topic">
-                <div class="text-4xl mb-4">📚</div>
-                <h3 class="text-2xl font-bold mb-2">Vocabulary</h3>
-                <p class="text-slate-500">Synonyms, Antonyms & Idioms.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4️⃣ VOCABULARY TOPICS -->
-    <section id="vocabTopicView" style="display:none;" class="max-w-5xl mx-auto px-6 py-12 animate-page">
-        <button onclick="goCategories()" class="text-blue-600 font-bold mb-6 flex items-center gap-2">← Back to Categories</button>
-        <h2 class="text-3xl font-bold mb-8">Vocabulary</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div onclick="goSynonymLevels()" class="card-topic">
-                <div class="text-4xl mb-4">📖</div>
-                <h3 class="text-2xl font-bold mb-2">Synonyms</h3>
-                <p class="text-slate-500">Learn similar words with context.</p>
+    <!-- 3️⃣ CONTACT SECTION -->
+    <section id="contactSection" class="py-32 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-white p-12 md:p-20 rounded-[3rem] shadow-xl border border-slate-100 text-center relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-sky-100 rounded-3xl flex items-center justify-center text-sky-600 text-3xl mx-auto mb-8">🤔</div>
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-6">Have any Doubts?</h2>
+                    <p class="text-lg text-slate-500 mb-10 max-w-md mx-auto">
+                        Don't let confusion stop your progress. If you have any questions regarding the topics, reach out to our mentor team.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="mailto:support@prepease.com" class="px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all">Email Support</a>
+                        <a href="#" class="px-8 py-4 border-2 border-slate-100 text-slate-600 font-bold rounded-2xl hover:bg-slate-50 transition-all">Join WhatsApp Group</a>
+                    </div>
+                </div>
+                <!-- Ambient Background Decor -->
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-sky-50 rounded-full blur-3xl opacity-50"></div>
+                <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-indigo-50 rounded-full blur-3xl opacity-50"></div>
             </div>
         </div>
     </section>
 
-    <!-- 5️⃣ LEVEL SELECTION -->
-    <section id="levelSelectionView" style="display:none;" class="max-w-5xl mx-auto px-6 py-12 animate-page">
-        <button onclick="goVocabulary()" class="text-blue-600 font-bold mb-6 flex items-center gap-2">← Back to Topics</button>
-        <h2 class="text-3xl font-bold mb-8">Synonyms: Select Level</h2>
-        <div id="level-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- JS will generate 7 levels here -->
+    <!-- FOOTER -->
+    <footer class="bg-white py-20 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center text-white font-black text-sm">P</div>
+                <span class="text-xl font-bold text-slate-900 tracking-tighter">PrepEase</span>
+            </div>
+            <p class="text-slate-400 text-sm">© 2026 PrepEase Education. Empowering Karnataka's Aspirants.</p>
         </div>
-    </section>
-
-    <!-- 6️⃣ CONTENT VIEW (Notes) -->
-    <section id="contentView" style="display:none;" class="max-w-3xl mx-auto px-6 py-12 animate-page">
-        <button onclick="goSynonymLevels()" class="text-blue-600 font-bold mb-6 flex items-center gap-2">← Back to Levels</button>
-        <div id="level-header" class="mb-10">
-            <h2 id="content-title" class="text-4xl font-black text-slate-900 mb-2 tracking-tight">Level Notes</h2>
-            <p class="text-slate-500">Read and understand the words before the quiz.</p>
-        </div>
-
-        <div id="notes-list" class="space-y-6">
-            <!-- Notes injected here -->
-        </div>
-
-        <div class="my-12 border-t border-slate-100 pt-12 text-center">
-            <p class="text-slate-400 font-medium">End of Notes</p>
-            <div class="h-1 w-20 bg-blue-100 mx-auto mt-4 rounded-full"></div>
-            <button onclick="alert('Questions coming in next update!')" class="mt-8 px-10 py-4 bg-slate-900 text-white font-bold rounded-xl">Continue to Quiz</button>
-        </div>
-    </section>
-
-    <!-- UI TOAST -->
-    <div id="ui-message" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 rounded-2xl bg-slate-900 text-white text-sm font-bold shadow-2xl hidden animate-page"></div>
+    </footer>
 
     <script>
-        // --- NAVIGATION CONTROLLER ---
-        function hideAll() {
-            const views = ["landingView", "dashboardView", "categoryView", "vocabTopicView", "levelSelectionView", "contentView"];
-            views.forEach(v => document.getElementById(v).style.display = "none");
-        }
-
-        function goDashboard() { hideAll(); document.getElementById("dashboardView").style.display = "block"; }
-        function goCategories() { hideAll(); document.getElementById("categoryView").style.display = "block"; }
-        function goVocabulary() { hideAll(); document.getElementById("vocabTopicView").style.display = "block"; }
-        
-        function goSynonymLevels() { 
-            hideAll(); 
-            const grid = document.getElementById("level-grid");
-            grid.innerHTML = "";
+        // --- PREMIUM NOTES LOADER ---
+        function loadPremiumNotes() {
+            const grid = document.getElementById('notesGrid');
+            const counter = document.getElementById('notesCount');
             
-            // Generate Levels 1 to 7
-            for (let i = 1; i <= 7; i++) {
-                const isLocked = i > 4;
-                grid.innerHTML += `
-                    <div onclick="${isLocked ? '' : `loadSynonymsLevel(${i})`}" 
-                         class="p-6 border-2 rounded-2xl text-center transition-all cursor-pointer ${isLocked ? 'level-locked border-slate-100' : 'border-blue-50 bg-blue-50/30 hover:border-blue-500 hover:bg-white'}">
-                        <div class="text-sm font-bold text-blue-600 mb-1">LEVEL</div>
-                        <div class="text-3xl font-black text-slate-900">${i} ${isLocked ? '🔒' : ''}</div>
-                    </div>
-                `;
-            }
-            document.getElementById("levelSelectionView").style.display = "block"; 
-        }
+            grid.innerHTML = `
+                <div class="col-span-full py-20 text-center animate-pulse">
+                    <div class="w-12 h-12 border-4 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <p class="text-slate-400 font-bold uppercase tracking-widest text-xs">Syncing Level 1 Database...</p>
+                </div>
+            `;
 
-        // --- DATA LOADER ---
-        function loadSynonymsLevel(levelNum) {
-            hideAll();
-            const listContainer = document.getElementById("notes-list");
-            const titleContainer = document.getElementById("content-title");
-            
-            titleContainer.innerText = `Synonyms - Level ${levelNum}`;
-            listContainer.innerHTML = "<p class='animate-pulse text-slate-400 text-center py-10'>Fetching study material...</p>";
-            document.getElementById("contentView").style.display = "block";
-
-            fetch(`./general-english/vocabulary/level-${levelNum}.json`)
+            // FETCH FROM level1.json
+            fetch('level1.json')
                 .then(res => {
-                    if (!res.ok) throw new Error("Level file not found");
+                    if (!res.ok) throw new Error("JSON file not found");
                     return res.json();
                 })
                 .then(data => {
-                    // DEBUG LOG
-                    console.log("Loaded notes:", data.notes ? data.notes.length : 0, data.notes);
-                    
-                    // Clear container once
-                    listContainer.innerHTML = "";
-                    
-                    const notes = data.notes || [];
+                    grid.innerHTML = "";
+                    counter.innerText = `${data.length} concepts loaded`;
 
-                    // Loop through all notes
-                    notes.forEach(n => {
-                        // Safe field access with fallbacks
-                        const word = n.word || "—";
-                        const engMeaning = n.meaning_english || "—";
-                        const kanMeaning = n.meaning_kannada || "—";
-                        const example = n.example || "";
-                        const emoji = n.emoji || "📖";
-                        const trickyWords = n.tricky_words || [];
-
-                        // Tricky words badges logic
-                        let trickyHtml = "";
-                        if (trickyWords.length > 0) {
-                            trickyHtml = `
-                                <div class="mt-4 pt-4 border-t border-slate-50">
-                                    <label class="text-[10px] font-bold text-amber-600 uppercase tracking-widest block mb-2">Tricky Words / Synonyms</label>
-                                    <div class="flex flex-wrap gap-2">
-                                        ${trickyWords.map(t => `<span class="px-3 py-1 bg-amber-50 text-amber-700 text-xs font-bold rounded-full border border-amber-100">${t}</span>`).join('')}
-                                    </div>
+                    data.forEach((item, index) => {
+                        // Clean up English meaning (replace underscores with comma)
+                        const cleanedMeaning = item.meaning_english.replace(/_/g, ', ');
+                        
+                        grid.innerHTML += `
+                            <div class="premium-card animate-page" style="animation-delay: ${index * 0.05}s">
+                                <div class="flex items-center justify-between mb-6">
+                                    <span class="text-5xl drop-shadow-sm">${item.emoji || '✨'}</span>
+                                    <span class="text-[10px] font-black text-sky-500 bg-sky-50 px-3 py-1 rounded-full uppercase tracking-tighter">Vocabulary</span>
                                 </div>
-                            `;
-                        }
-
-                        // Append card
-                        listContainer.innerHTML += `
-                            <div class="p-8 border border-slate-100 rounded-[2rem] bg-white shadow-sm hover:shadow-md transition-all">
-                                <div class="flex items-start justify-between mb-4">
-                                    <h3 class="text-3xl font-black text-slate-900 tracking-tight">
-                                        ${word}
-                                    </h3>
-                                    <span class="text-4xl">${emoji}</span>
-                                </div>
-                                <div class="space-y-4">
-                                    <div>
-                                        <label class="text-[10px] font-bold text-blue-500 uppercase tracking-widest block mb-1">English Meaning</label>
-                                        <p class="text-lg text-slate-700 font-medium leading-relaxed">${engMeaning}</p>
-                                    </div>
-                                    <div>
-                                        <label class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest block mb-1">Kannada Meaning</label>
-                                        <p class="text-2xl font-bold text-slate-800 font-kannada leading-relaxed">${kanMeaning}</p>
-                                    </div>
-                                    ${example ? `
-                                    <div class="pt-4 border-t border-slate-50">
-                                        <p class="text-sm italic text-slate-500"><span class="font-bold not-italic text-slate-400 mr-2">Example:</span>${example}</p>
-                                    </div>` : ''}
-                                    ${trickyHtml}
-                                </div>
+                                <h3 class="text-2xl font-black text-slate-900 mb-2 tracking-tight">
+                                    ${item.word}
+                                </h3>
+                                <p class="text-sky-600 font-extrabold text-xl mb-4 font-kannada">
+                                    ${item.meaning_kannada || ''}
+                                </p>
+                                <div class="h-0.5 w-full bg-slate-50 rounded-full mb-4"></div>
+                                <p class="text-slate-500 font-medium leading-relaxed text-sm">
+                                    ${cleanedMeaning}
+                                </p>
                             </div>
                         `;
                     });
                 })
                 .catch(err => {
-                    listContainer.innerHTML = `
-                        <div class="p-12 text-center border-2 border-dashed border-slate-100 rounded-[2rem]">
-                            <div class="text-4xl mb-4">🚧</div>
-                            <h3 class="text-xl font-bold text-slate-800">Content coming soon</h3>
-                            <p class="text-sm text-slate-400 mt-2">We are currently preparing Level ${levelNum}.</p>
+                    grid.innerHTML = `
+                        <div class="col-span-full py-20 text-center bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200">
+                            <div class="text-5xl mb-4">🚧</div>
+                            <h3 class="text-xl font-black text-slate-800">Connection Error</h3>
+                            <p class="text-slate-400 mt-2 max-w-xs mx-auto text-sm">Please ensure <b>level1.json</b> is uploaded to your GitHub folder.</p>
                         </div>
                     `;
-                    console.error("Fetch error:", err);
                 });
+        }
+
+        // Placeholder for Dashboard
+        function goDashboard() {
+            alert("Dashboard feature is being synchronized. Please use the Study Hub for now.");
         }
     </script>
 </body>
